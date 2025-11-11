@@ -1,0 +1,4 @@
+handshake_full_nodes:
+  hosts:
+    debian13:
+      ansible_host: 192.168.1.210

@@ -1,0 +1,5 @@
+---
+- hosts: handshake_full_nodes
+  become: true
+  roles:
+     - handshake_full_nodes

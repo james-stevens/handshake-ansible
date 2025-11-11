@@ -1,0 +1,14 @@
+---
+- name: Update package db
+  ansible.builtin.command: apt-get update
+
+- name: Remove unwanted docker packages
+  ansible.builtin.package:
+    name:
+      - docker.io
+      - docker-doc
+      - docker-compose
+      - podman-docker
+      - containerd
+      - runc
+    state: absent
