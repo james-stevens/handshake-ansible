@@ -1,0 +1,11 @@
+[Unit]
+Description=Handshake Full Node Container
+After=docker.service containerd.service
+Wants=docker.service containerd.service
+Requires=docker.socket docker.service
+
+[Service]
+ExecStart=/usr/local/bin/start_handshake_full_node
+ExecReload=/usr/local/bin/restart_container handshake-full-node
+
+KillMode=process

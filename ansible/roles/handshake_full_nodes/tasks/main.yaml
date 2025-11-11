@@ -2,3 +2,25 @@
 - name: Install Docker
   ansible.builtin.include_role:
      name: docker
+
+- name: Pull container, {{ handshake_full_nodes_docker_image }}
+  ansible.builtin.command: docker pull "{{ handshake_full_nodes_docker_image }}"
+
+- name: Install systemd service file
+  ansible.builtin.copy:
+    src: files/handshake_full_node.service
+    dest: /usr/lib/systemd/system/handshake_full_node.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Systemd Reload
+
+- name: Create data directory, {{ handshake_full_nodes_data_directory }}
+  ansible.builtin.file:
+    path: {{ handshake_full_nodes_data_directory }}
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+

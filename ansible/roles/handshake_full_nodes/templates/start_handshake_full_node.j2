@@ -1,0 +1,7 @@
+#! /bin/sh
+
+exec docker run --read-only ${dknet} \
+    --env "HSD_LOG_LEVEL={{ handshake_full_nodes_hsd_log_level }}" \
+    -v {{ handshake_full_nodes_data_directory }}:/opt/data \
+    -it {{ handshake_full_nodes_docker_image }}
+
