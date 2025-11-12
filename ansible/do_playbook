@@ -6,7 +6,7 @@ if test -z "$*"
     exit 1
   fi
 
-# Uncommand the next like to get password prompting
-# ansible-playbook -b -i ./inventory.yaml -l "$*" -K ./${PLAYBOOK:-install.yaml}
+ansible-playbook -b -i ./${INVENTORY:-inventory.yaml} -l "$*" ./${PLAYBOOK:-install.yaml} \
+  --become-password-file ~/.ssh/pass
 
-ansible-playbook -b -i ./inventory.yaml -l "$*" ./${PLAYBOOK:-install.yaml} --become-password-file ~/.ssh/pass
+# replace `--become-password-file ~/.ssh/pass` with `-K` if you prefer to be prompted for the password
