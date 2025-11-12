@@ -6,7 +6,7 @@
 - name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
   ansible.builtin.command: docker pull "{{ handshake_full_nodes_docker_image }}"
 
-- name: Install systemd service file
+- name: Install handshake_full_node's systemd service file
   ansible.builtin.template:
     src: templates/handshake_full_node.service.j2
     dest: /usr/lib/systemd/system/handshake_full_node.service
@@ -19,7 +19,7 @@
 - name: Force systemd to reload
   ansible.builtin.meta: flush_handlers
 
-- name: "Create data directory, {{ handshake_full_nodes_data_directory }}"
+- name: "Create handshake_full_node's data directory, {{ handshake_full_nodes_data_directory }}"
   ansible.builtin.file:
     path: "{{ handshake_full_nodes_data_directory }}"
     state: directory
@@ -27,7 +27,7 @@
     owner: root
     group: root
 
-- name: Make start up script
+- name: Create and install handshake_full_node start up script
   ansible.builtin.template:
     src: templates/start_handshake_full_node.j2
     dest: /usr/local/bin/start_handshake_full_node
@@ -37,7 +37,7 @@
   notify:
     - Restart Full Node Container
 
-- name: Ensure handshake_full_node container is running
+- name: Ensure handshake_full_node container is enabled & running
   ansible.builtin.service:
     name: handshake_full_node
     enabled: true

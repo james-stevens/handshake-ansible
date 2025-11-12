@@ -1,4 +1,13 @@
 #! /bin/sh
 
-base="/opt/github/handshake-ansible/ansible"
-ansible-playbook -i ${base}/inventory.yaml -l handshake_full_nodes --become-password-file ~/.ssh/pass ${base}/install.yaml
+if test -z "$*"
+  then
+    echo "Usage: $0 <hosts/groups to install>"
+    exit 1
+  fi
+
+ansible-playbook -b -i ./inventory.yaml -l "$*" -K ./install.yaml
+
+# If you are getting fed-up with being asked for your `sudo` password,
+# you can put it in a file and use an option like this
+# --become-password-file ~/.ssh/pass
