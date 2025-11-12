@@ -1,13 +1,3 @@
 #! /bin/sh
 
-if test -z "$*"
-  then
-    echo "Usage: $0 <hosts/groups to install>"
-    exit 1
-  fi
-
-ansible-playbook -b -i ./inventory.yaml -l "$*" -K ./install.yaml
-
-# If you are getting fed-up with being asked for your `sudo` password,
-# you can put it in a file and use an option like this
-# --become-password-file ~/.ssh/pass
+PLAYBOOK=install.yaml ./do_playbook "$*"

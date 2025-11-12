@@ -1,0 +1,12 @@
+#! /bin/sh
+
+if test -z "$*"
+  then
+    echo "Usage: $0 <hosts/groups to install>"
+    exit 1
+  fi
+
+# Uncommand the next like to get password prompting
+# ansible-playbook -b -i ./inventory.yaml -l "$*" -K ./${PLAYBOOK:-install.yaml}
+
+ansible-playbook -b -i ./inventory.yaml -l "$*" ./${PLAYBOOK:-install.yaml} --become-password-file ~/.ssh/pass

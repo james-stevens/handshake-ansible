@@ -1,3 +1,7 @@
 ---
 - name: Systemd Reload
   ansible.builtin.command: systemctl daemon-reload
+
+- name: Reboot Server
+  ansible.builtin.reboot:
+    msg: "Rebooting machine in 5 seconds"

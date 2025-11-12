@@ -42,3 +42,7 @@
     name: handshake_full_node
     enabled: true
     state: started
+
+- name: Make sure all pakages are up-to-date
+  ansible.builtin.include_role:
+    name: update_server
