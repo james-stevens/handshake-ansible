@@ -4,19 +4,20 @@
      name: docker
 
 - name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
-  community.docker.docker_image_pull:
-    name: "{{ handshake_full_nodes_docker_image }}"
-    platform: amd64
+  ansible.builtin.command: docker pull "{{ handshake_full_nodes_docker_image }}"
 
 - name: Install systemd service file
-  ansible.builtin.copy:
-    src: files/handshake_full_node.service
+  ansible.builtin.template:
+    src: templates/handshake_full_node.service.j2
     dest: /usr/lib/systemd/system/handshake_full_node.service
     owner: root
     group: root
     mode: '0644'
   notify:
     - Systemd Reload
+
+- name: Force systemd to reload
+  ansible.builtin.meta: flush_handlers
 
 - name: "Create data directory, {{ handshake_full_nodes_data_directory }}"
   ansible.builtin.file:
@@ -35,3 +36,9 @@
     mode: '0755'
   notify:
     - Restart Full Node Container
+
+- name: Ensure handshake_full_node container is running
+  ansible.builtin.service:
+    name: handshake_full_node
+    enabled: true
+    state: started

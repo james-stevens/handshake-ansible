@@ -1,4 +1,4 @@
 #! /bin/sh
 
 image="$1"
-docker stop $(docker ps -a -q --filter="${image}")
+docker stop $(docker ps | awk '{ if ($2=="'"${image}"'") print $1 }')

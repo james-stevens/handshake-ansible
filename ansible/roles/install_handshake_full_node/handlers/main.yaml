@@ -1,4 +1,5 @@
 ---
 - name: Restart Full Node Container
-  ansible.builtin.debug:
-    msg: "Restart Full Node Container"
+  ansible.builtin.service:
+    name: handshake_full_node
+    state: restarted

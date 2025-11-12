@@ -6,6 +6,6 @@ Requires=docker.socket docker.service
 
 [Service]
 ExecStart=/usr/local/bin/start_handshake_full_node
-ExecReload=/usr/local/bin/restart_container handshake-full-node
+ExecStop=/usr/local/bin/stop_container {{ handshake_full_nodes_docker_image }}
 
 KillMode=process

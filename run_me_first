@@ -1,4 +1,0 @@
-#! /bin/sh
-
-ansible-galaxy collection install community.docker
-ansible-galaxy collection install community.docker --upgrade
