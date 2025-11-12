@@ -1,0 +1,5 @@
+---
+# Uncomment the next line and change the name, if you want to use a different container
+# handshake_full_nodes_docker_image: jamesstevens/handshake-full-node
+
+# check in the "roles/*/defaults/main.yaml" files for other variables you might want to change

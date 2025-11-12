@@ -1,0 +1,10 @@
+---
+handshake_full_nodes_docker_image: jamesstevens/handshake-full-node
+handshake_full_nodes_data_directory: /opt/data/handshake-full-node
+handshake_full_nodes_hsd_log_level: warning
+handshake_full_nodes_hsd_additional_params: "--no-sig0 --no-wallet"
+
+handshake_full_nodes_hsd_public_node: true
+handshake_full_nodes_dns_auth_public: false
+handshake_full_nodes_dns_recurse_public: false
+handshake_full_nodes_dns_both_public: false

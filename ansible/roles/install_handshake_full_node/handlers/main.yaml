@@ -1,0 +1,4 @@
+---
+- name: Restart Full Node Container
+  ansible.builtin.debug:
+    msg: "Restart Full Node Container"

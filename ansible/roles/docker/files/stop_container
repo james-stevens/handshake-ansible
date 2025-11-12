@@ -1,0 +1,4 @@
+#! /bin/sh
+
+image="$1"
+docker stop $(docker ps -a -q --filter="${image}")

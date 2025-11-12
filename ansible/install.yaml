@@ -2,4 +2,4 @@
 - hosts: handshake_full_nodes
   become: true
   roles:
-     - handshake_full_nodes
+     - install_handshake_full_node

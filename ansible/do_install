@@ -1,0 +1,4 @@
+#! /bin/sh
+
+base="/opt/github/handshake-ansible/ansible"
+ansible-playbook -i ${base}/inventory.yaml -l handshake_full_nodes --become-password-file ~/.ssh/pass ${base}/install.yaml

@@ -1,0 +1,17 @@
+#! /bin/sh
+
+exec docker run --read-only \
+    --env HSD_LOG_LEVEL="{{ handshake_full_nodes_hsd_log_level }}" \
+    --env HSD_ADDITIONAL_PARAMS="{{ handshake_full_nodes_hsd_additional_params }}" \
+    -v {{ handshake_full_nodes_data_directory }}:/opt/data \
+{% if handshake_full_nodes_hsd_public_node %}
+    -p 12038:12038 -p 44806:44806 \
+{% endif %}
+{% if handshake_full_nodes_dns_both_public %}
+    -p 53:53/udp \
+{% elif handshake_full_nodes_dns_auth_public %}
+    -p 53:5349/udp \
+{% elif handshake_full_nodes_dns_recurse_public %}
+    -p 53:5350/udp \
+{% endif %}
+    -it {{ handshake_full_nodes_docker_image }}
