@@ -7,6 +7,13 @@
   ansible.builtin.include_tasks: debian.yaml
   when: ansible_facts['os_family']|lower == 'debian'
 
+- name: Install misc conatiner required packages
+  ansible.builtin.package:
+    name:
+      - jq
+      - skopeo
+    state: present
+
 - name: Ensure docker services are running
   ansible.builtin.service:
     name: "{{ item }}"
@@ -16,10 +23,13 @@
     - containerd
     - docker
 
-- name: Install container stop script
+- name: Install container helper scripts
   ansible.builtin.copy:
-    src: files/stop_container
-    dest: /usr/local/bin/stop_container
+    src: "files/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
     owner: root
     group: root
     mode: '0777'
+  loop:
+    - container_needs_updating
+    - stop_container

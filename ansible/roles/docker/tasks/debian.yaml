@@ -15,7 +15,7 @@
 - name: Force unwanted packages to go
   ansible.builtin.meta: flush_handlers
 
-- name: Install ca-certs
+- name: Install ca-certificates
   ansible.builtin.package:
     name:
       - ca-certificates

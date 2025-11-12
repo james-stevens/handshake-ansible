@@ -3,7 +3,7 @@
   ansible.builtin.apt:
     update_cache: true
 
-- name: Update all packages to their latest version
+- name: Update all packages
   ansible.builtin.apt:
     name: "*"
     state: latest
