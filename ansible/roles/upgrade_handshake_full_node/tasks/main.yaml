@@ -2,7 +2,7 @@
 - name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
   ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_nodes_docker_image }}"
   register: result
-  changed_when: result.rc == 2
+  changed_when: "'CHANGE' in result.stdout"
   notify:
     - Restart Full Node Container
 

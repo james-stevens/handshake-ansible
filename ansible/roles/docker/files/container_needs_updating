@@ -1,0 +1,12 @@
+#! /bin/sh
+
+image="$1"
+if ! test "$(skopeo inspect docker://${image} | jq -r .Digest)" = "$(docker image inspect ${image} | jq -r '.[0].Id')"
+  then
+    docker pull ${image}
+    echo "CHANGE"
+    exit 0
+  fi
+
+echo "OK"
+exit 0

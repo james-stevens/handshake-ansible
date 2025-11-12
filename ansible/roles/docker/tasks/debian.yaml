@@ -19,6 +19,7 @@
   ansible.builtin.package:
     name:
       - ca-certificates
+      - firewalld
     state: present
 
 - name: Make keyrings directory

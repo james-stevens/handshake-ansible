@@ -1,5 +1,5 @@
 ---
 - name: Restart Full Node Container
   ansible.builtin.service:
-    name: handshake_full_node
+    name: handshake-full-node
     state: restarted
