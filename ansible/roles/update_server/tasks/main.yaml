@@ -1,7 +1,7 @@
 ---
 - name: Uodate packages database
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:

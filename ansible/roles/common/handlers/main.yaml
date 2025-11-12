@@ -1,6 +1,7 @@
 ---
 - name: Systemd Reload
-  ansible.builtin.command: systemctl daemon-reload
+  ansible.builtin.systemd_service:
+    daemon_reload: true
 
 - name: Reboot Server
   ansible.builtin.reboot:

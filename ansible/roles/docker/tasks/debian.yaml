@@ -15,11 +15,10 @@
 - name: Force unwanted packages to go
   ansible.builtin.meta: flush_handlers
 
-- name: Install ca-certs and curl
+- name: Install ca-certs
   ansible.builtin.package:
     name:
       - ca-certificates
-      - curl
     state: present
 
 - name: Make keyrings directory
@@ -31,9 +30,10 @@
     group: root
 
 - name: Get docker's current key
-  ansible.builtin.command: curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-  args:
-    creates: /etc/apt/keyrings/docker.asc
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0444'
   notify:
     - Update package db
 

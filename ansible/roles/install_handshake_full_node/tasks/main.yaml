@@ -1,7 +1,7 @@
 ---
 - name: Install Docker
   ansible.builtin.include_role:
-     name: docker
+    name: docker
 
 - name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
   ansible.builtin.command: docker pull "{{ handshake_full_nodes_docker_image }}"
