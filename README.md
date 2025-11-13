@@ -99,7 +99,7 @@ do anything useful, this can take some time.
 | `handshake_full_nodes_dns_both_public` | `53` | `0.0.0.0:53`
 | `handshake_full_nodes_hsd_private_node` | `12038` & `44806` | `127.0.0.1:12038` & `127.0.0.1:44806`
 | `handshake_full_nodes_dns_auth_private` | `5349` | `127.0.0.1:53`
-| `handshake_full_nodes_dns_recurse_private` | `5350` | 127.0.0.1:53`
+| `handshake_full_nodes_dns_recurse_private` | `5350` | `127.0.0.1:53`
 | `handshake_full_nodes_dns_both_private` | `53` | `127.0.0.1:53`
 
 NOTE: Only one of the six DNS options, and one of the two `hsd` options,
