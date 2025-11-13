@@ -8,8 +8,18 @@ I tested on Debian v13 and Ubuntu v24.04, but its likely the ansible will work
 on other versions as ansible is reasonably version independent.
 
 In each server type's case, it will install `docker`, then pull the appropriate
-container to run, so all the functional code is actually in the container. The
+container(s) to run, so all the functional code is actually in the container. The
 base operating system is only used as a docker host.
+
+## Other Dcoker Platforms
+
+Becuase all the hard work is done in the container, it should be relatively easy to 
+get this to work with other platforms.
+
+The file `roles/docker/tasks/main.yaml` splits the Docker install by platform.
+
+If you run `./do_debug` you can find out the `distribution` name of the new platform,
+then edit `roles/docker/tasks/main.yaml` to add suppport for it.
 
 ## Scripts
 
