@@ -42,12 +42,12 @@ changed.
 
 ## Inventory.yaml
 
-The first thing you will need to do is copy “example_inventory.yaml” 
-to “inventory.yaml”, then edit it to list your hosts. You do not have to
+The first thing you will need to do is copy `example_inventory.yaml`
+to `inventory.yaml`, then edit it to list your hosts. You do not have to
 state whether they are Debian or Ubuntu, that is auto-detected by ansible.
 
 The requirements of your server are that you have a login and your login has
-permission to `sudo` (i.e. is in the group “sudo”). You will need to know
+permission to `sudo` (i.e. is in the group `sudo`). You will need to know
 the password of this login for `sudo` to work. You can do the initial login
 either with passwords or ssh-keys, obv keys is better.
 
@@ -57,12 +57,12 @@ script `do_playbook`.
 
 ## Installing
 
-So, for example, if (in your inventory) you have a new host called “newyork1”
-in the group “handshake_full_nodes”, then running `./do_install  newyork1`
+So, for example, if (in your inventory) you have a new host called `newyork1`
+in the group `handshake_full_nodes`, then running `./do_install  newyork1`
 will install & run everything needed to turn it into a Handshake Full Node.
 
 This installs & runs docker, pulls the container `jamesstevens/handshake-full-node`,
-sets up the systemd service “handshake-full-node” and enables & runs it.
+sets up a system service called `handshake-full-node` and enables & runs it.
 
 You can now stop, start & restart the service using `systemctl`, e.g. `sudo systemctl
 stop handshake-full-node` or check it's startus with `sudo systemctl status handshake-full-node`
