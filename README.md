@@ -63,6 +63,9 @@ The first thing you will need to do is copy `example_inventory.yaml`
 to `inventory.yaml`, then edit it to list your hosts. You do not have to
 state whether they are Debian or Ubuntu, that is auto-detected by ansible.
 
+You will also need to change the initial user name (`ansible_user`) from "james"
+to whatever you plan to use.
+
 ## Installing
 
 So, for example, if (in your inventory) you have a new host called `newyork1`
