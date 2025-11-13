@@ -1,4 +1,7 @@
 ---
+# NOTE: `group_vars` apply to *ALL* hosts in the group, if this is not what you
+# want, add a `vars:` clause to individual hosts.
+#
 # Uncomment the next line and change the name, if you want to use a different container
 
 # handshake_full_nodes_docker_image: jamesstevens/handshake-full-node
