@@ -38,15 +38,11 @@ then restart the container or reboot the server, depending on what got upgraded.
 `do_update_container_only` will only update the container and restart it if it
 changed.
 
-`do_debug` is for seeing all “facts” on a host.
+`do_debug` is for seeing all "facts" on a host.
 
-## Inventory.yaml
+## Requirements
 
-The first thing you will need to do is copy `example_inventory.yaml`
-to `inventory.yaml`, then edit it to list your hosts. You do not have to
-state whether they are Debian or Ubuntu, that is auto-detected by ansible.
-
-The requirements of your server are that you have a login and your login has
+The requirements of your server is that it runs an SSH service, you have a login and your login has
 permission to `sudo` (i.e. is in the group `sudo`). You will need to know
 the password of this login for `sudo` to work. You can do the initial login
 either with passwords or ssh-keys, obv keys is better.
@@ -54,6 +50,18 @@ either with passwords or ssh-keys, obv keys is better.
 You can either put the `sudo` password into a file (default is `~/.ssh/pass`)
 or you can get ansible to ask you for the password every time by editing the
 script `do_playbook`.
+
+Ansible also needs Python v2 or v3 installed on the target server. For more information
+see [Ansible - Managed node requirements](https://docs.ansible.com/projects/ansible/2.9/installation_guide/intro_installation.html#managed-node-requirements).
+
+You will also need to have Python v2 or v3 installed on the machine you
+plan to run the ansible from.
+
+## Inventory.yaml
+
+The first thing you will need to do is copy `example_inventory.yaml`
+to `inventory.yaml`, then edit it to list your hosts. You do not have to
+state whether they are Debian or Ubuntu, that is auto-detected by ansible.
 
 ## Installing
 
