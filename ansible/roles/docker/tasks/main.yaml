@@ -1,10 +1,14 @@
 ---
 - name: Install docker on Ubuntu
-  ansible.builtin.include_tasks: ubuntu.yaml
+  ansible.builtin.include_role:
+    name: docker
+    tasks_from: ubuntu
   when: ansible_facts['os_family']|lower == 'ubuntu'
 
 - name: Install docker on Debian
-  ansible.builtin.include_tasks: debian.yaml
+  ansible.builtin.include_role:
+    name: docker
+    tasks_from: debian
   when: ansible_facts['os_family']|lower == 'debian'
 
 - name: Install misc conatiner required packages

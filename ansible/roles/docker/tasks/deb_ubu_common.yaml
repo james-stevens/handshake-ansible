@@ -35,3 +35,30 @@
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
+
+- name: Install misc conatiner required packages
+  ansible.builtin.package:
+    name:
+      - jq
+      - skopeo
+    state: present
+
+- name: Install container helper scripts
+  ansible.builtin.copy:
+    src: "files/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: '0777'
+  loop:
+    - container_needs_updating
+    - stop_container
+
+- name: Ensure docker services are running
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - containerd
+    - docker
