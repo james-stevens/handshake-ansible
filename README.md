@@ -51,7 +51,7 @@ You can either put the `sudo` password into a file (default is `~/.ssh/pass`)
 or you can get ansible to ask you for the password every time by editing the
 script `do_playbook`.
 
-Ansible also needs Python v2 or v3 installed on the target server. For more information
+Ansible needs Python v2 or v3 installed on the target server. For more information
 see [Ansible - Managed node requirements](https://docs.ansible.com/projects/ansible/2.9/installation_guide/intro_installation.html#managed-node-requirements).
 
 You will also need to have Python v2 or v3 installed on the machine you
