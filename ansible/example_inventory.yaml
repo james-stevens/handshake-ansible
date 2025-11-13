@@ -1,4 +1,12 @@
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: james
+    ansible_python_interpreter: python3
+
 handshake_full_nodes:
   hosts:
     debian13:
       ansible_host: 192.168.1.210
+    ubuntu24:
+      ansible_host: 192.168.1.220

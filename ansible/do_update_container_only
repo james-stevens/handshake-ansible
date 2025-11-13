@@ -1,0 +1,3 @@
+#! /bin/sh
+
+EXTRA_VARS="update_server_include_platform=false" PLAYBOOK=upgrade.yaml ./do_playbook "$*"

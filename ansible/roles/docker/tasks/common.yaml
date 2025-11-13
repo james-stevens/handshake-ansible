@@ -1,0 +1,37 @@
+---
+- name: Force unwanted packages to go
+  ansible.builtin.meta: flush_handlers
+
+- name: Install ca-certificates
+  ansible.builtin.package:
+    name:
+      - ca-certificates
+    state: present
+
+- name: Make keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Get docker's current key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0444'
+  notify:
+    - Update package db
+
+- name: Force package update handler to run
+  ansible.builtin.meta: flush_handlers
+
+- name: Install fresh packages
+  ansible.builtin.package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin

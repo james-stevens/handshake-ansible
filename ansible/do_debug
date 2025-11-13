@@ -1,0 +1,3 @@
+#! /bin/sh
+
+PLAYBOOK=debug.yaml ./do_playbook "$*"

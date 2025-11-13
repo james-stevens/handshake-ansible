@@ -39,12 +39,8 @@
   notify:
     - Restart Full Node Container
 
-- name: Ensure handshake_full_node container is enabled & running
+- name: "Ensure handshake-full-node service is enabled & running"
   ansible.builtin.service:
     name: handshake-full-node
     enabled: true
     state: started
-
-- name: Make sure all pakages are up-to-date
-  ansible.builtin.include_role:
-    name: update_server
