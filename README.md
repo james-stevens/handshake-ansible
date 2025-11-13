@@ -1,4 +1,4 @@
-#Handshake Ansible
+# Handshake Ansible
 
 This repo contains the ansible you need to install various Handshake service on either a Debian or Ubuntu host. I tested on Debian v13 and Ubuntu v24.04, but its likely the ansible will work on other versions as ansible is reasonably version independent.
 
