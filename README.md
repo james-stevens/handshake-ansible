@@ -104,3 +104,6 @@ do anything useful, this can take some time.
 
 NOTE: Only one of the six DNS options, and one of the two `hsd` options,
 can be `true` at a time, or the container will fail to start.
+
+If you change any of these options, you can simply re-run the `do_install` script and it will
+make the necessary changes.
