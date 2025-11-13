@@ -77,7 +77,7 @@ So queries with `RD=0` will get sent to `hsd`'s Auth port (`5349`) and `RD=1` qu
 go to the recursive port (`5350`). The proxy listens on port `53`.
 
 The container start-script can map the container's ports `5349`, `5350` or `53` to the
-host's port 53, either on address `0.0.0.0` or `127.0.0.1`, depending if you enable
+host's port `53`, either on address `0.0.0.0` or `127.0.0.1`, depending if you enable
 the service as public or private. The default is to make the `hsd` ports public
 and the dns-proxy's port (`53`) private (`127.0.0.1`).
 
