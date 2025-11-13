@@ -15,4 +15,14 @@ exec docker run --read-only \
 {% elif handshake_full_nodes_dns_recurse_public %}
     -p 53:5350/udp \
 {% endif %}
+{% if handshake_full_nodes_hsd_private_node %}
+    -p 127.0.0.1:12038:12038 -p 127.0.0.1:44806:44806 \
+{% endif %}
+{% if handshake_full_nodes_dns_both_private %}
+    -p 127.0.0.1:53:53/udp \
+{% elif handshake_full_nodes_dns_auth_private %}
+    -p 127.0.0.1:53:5349/udp \
+{% elif handshake_full_nodes_dns_recurse_private %}
+    -p 127.0.0.1:53:5350/udp \
+{% endif %}
     -t {{ handshake_full_nodes_docker_image }}

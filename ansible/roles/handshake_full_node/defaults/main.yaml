@@ -8,3 +8,8 @@ handshake_full_nodes_hsd_public_node: true
 handshake_full_nodes_dns_auth_public: false
 handshake_full_nodes_dns_recurse_public: false
 handshake_full_nodes_dns_both_public: false
+
+handshake_full_nodes_hsd_private_node: false
+handshake_full_nodes_dns_auth_private: false
+handshake_full_nodes_dns_recurse_private: false
+handshake_full_nodes_dns_both_private: true
