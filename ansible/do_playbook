@@ -9,4 +9,5 @@ if test -z "$*"
 ansible-playbook -e "${EXTRA_VARS}" -b -i ./${INVENTORY:-inventory.yaml} -l "$*" ./${PLAYBOOK:-install.yaml} \
   --become-password-file ~/.ssh/pass
 
-# replace `--become-password-file ~/.ssh/pass` with `-K` if you prefer to be prompted for the password
+# replace `--become-password-file ~/.ssh/pass` with `-K` if you prefer to be prompted for the `sudo` password
+# add `-k` if you are using passwords instead of ssh-keys for the initial login
