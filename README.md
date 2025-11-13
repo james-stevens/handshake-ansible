@@ -18,7 +18,7 @@ get this to work with other platforms.
 
 The file `roles/docker/tasks/main.yaml` splits the Docker install by platform.
 
-If you run `./do_debug` you can find out the `distribution` name of the new platform,
+If you run `./do_debug` you can find out the `distribution` name of a new platform,
 then edit `roles/docker/tasks/main.yaml` to add suppport for it.
 
 ## Scripts
