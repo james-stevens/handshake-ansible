@@ -11,7 +11,7 @@ In each server type's case, it will install `docker`, then pull the appropriate
 container(s) to run, so all the functional code is actually in the container. The
 base operating system is only used as a docker host.
 
-## Other Dcoker Platforms
+## Other Docker Platforms
 
 Becuase all the hard work is done in the container, it should be relatively easy to 
 get this to work with other platforms.
