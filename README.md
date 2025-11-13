@@ -84,10 +84,10 @@ and the dns-proxy's port (`53`) private (`127.0.0.1`).
 The file `group_vars/handshake_full_nodes.yaml` has a few more variables you can
 tweak. This includes running a different container, if you wish.
 
-NOTE: Some of the options in the `group_vars` file may not work, if you use a different
+**NOTE**: Some of the options in the `group_vars` file may not work, if you use a different
 container.
 
-NOTE: When you first run it, it will need to seed the blockchain, before it can
+**NOTE**: When you first run it, it will need to seed the blockchain, before it can
 do anything useful, this can take some time.
 
 ## Port Mapping Options
@@ -102,7 +102,7 @@ do anything useful, this can take some time.
 | `handshake_full_nodes_dns_recurse_private` | `5350` | `127.0.0.1:53`
 | `handshake_full_nodes_dns_both_private` | `53` | `127.0.0.1:53`
 
-NOTE: Only one of the six DNS options, and one of the two `hsd` options,
+**NOTE**: Only one of the six DNS options, and one of the two `hsd` options,
 can be `true` at a time, or the container will fail to start.
 
 If you change any of these options, you can simply re-run the `do_install` script and it will
