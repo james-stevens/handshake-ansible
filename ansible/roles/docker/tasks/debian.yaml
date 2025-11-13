@@ -2,7 +2,7 @@
 #
 # This install from https://docs.docker.com/engine/install/debian/
 #
-- name: Make docker sources file
+- name: Make docker apt sources file
   ansible.builtin.template:
     src: templates/debian.docker.sources.j2
     dest: /etc/apt/sources.list.d/docker.sources
@@ -11,6 +11,9 @@
     mode: '0644'
   notify:
     - Remove unwanted docker packages
+
+- name: Force unwanted packages to go
+  ansible.builtin.meta: flush_handlers
 
 - name: Rest of the docker install, common wuth Ubuntu
   ansible.builtin.include_role:

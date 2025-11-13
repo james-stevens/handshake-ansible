@@ -1,7 +1,4 @@
 ---
-- name: Force unwanted packages to go
-  ansible.builtin.meta: flush_handlers
-
 - name: Install ca-certificates
   ansible.builtin.package:
     name:
@@ -21,13 +18,12 @@
     url: https://download.docker.com/linux/debian/gpg
     dest: /etc/apt/keyrings/docker.asc
     mode: '0444'
-  notify:
-    - Update package db
 
-- name: Force package update handler to run
-  ansible.builtin.meta: flush_handlers
+- name: Update package db
+  ansible.builtin.apt:
+    update_cache: true
 
-- name: Install fresh packages
+- name: Install fresh offical docker.com packages
   ansible.builtin.package:
     name:
       - docker-ce

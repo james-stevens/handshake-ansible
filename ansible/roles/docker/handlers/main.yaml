@@ -1,8 +1,4 @@
 ---
-- name: Update package db
-  ansible.builtin.apt:
-    update_cache: true
-
 - name: Remove unwanted docker packages
   ansible.builtin.package:
     name:

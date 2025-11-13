@@ -1,0 +1,28 @@
+---
+#
+# This install from https://docs.docker.com/engine/install/ubuntu/
+#
+- name: Get dpkg architecture
+  ansible.builtin.command: dpkg --print-architecture
+  register: dpkg_arch
+  changed_when: false
+
+- name: Make docker apt sources file
+  ansible.builtin.template:
+    src: templates/ubuntu.docker.list.j2
+    dest: /etc/apt/sources.list.d/docker.list
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    dpkg_architecture: "{{ dpkg_arch.stdout }}"
+  notify:
+    - Remove unwanted docker packages
+
+- name: Force unwanted packages to go
+  ansible.builtin.meta: flush_handlers
+
+- name: Rest of the docker install, common wuth Ubuntu
+  ansible.builtin.include_role:
+    name: docker
+    tasks_from: deb_ubu_common
