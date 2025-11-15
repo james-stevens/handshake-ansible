@@ -104,14 +104,14 @@ do anything useful, this can take some time.
 ## Port Mapping Options
 | Option Name | Container Port | Mapped to Host|
 |-------------|----------------|---------------|
-| `handshake_full_nodes_hsd_public_node` | `12038` & `44806` | `0.0.0.0:12038` & `0.0.0.0:44806`
-| `handshake_full_nodes_dns_auth_public` | `5349` | `0.0.0.0:53`
-| `handshake_full_nodes_dns_recurse_public` | `5350` | `0.0.0.0:53`
-| `handshake_full_nodes_dns_both_public` | `53` | `0.0.0.0:53`
-| `handshake_full_nodes_hsd_private_node` | `12038` & `44806` | `127.0.0.1:12038` & `127.0.0.1:44806`
-| `handshake_full_nodes_dns_auth_private` | `5349` | `127.0.0.1:53`
-| `handshake_full_nodes_dns_recurse_private` | `5350` | `127.0.0.1:53`
-| `handshake_full_nodes_dns_both_private` | `53` | `127.0.0.1:53`
+| `handshake_full_node_hsd_public_node` | `12038` & `44806` | `0.0.0.0:12038` & `0.0.0.0:44806`
+| `handshake_full_node_dns_auth_public` | `5349` | `0.0.0.0:53`
+| `handshake_full_node_dns_recurse_public` | `5350` | `0.0.0.0:53`
+| `handshake_full_node_dns_both_public` | `53` | `0.0.0.0:53`
+| `handshake_full_node_hsd_private_node` | `12038` & `44806` | `127.0.0.1:12038` & `127.0.0.1:44806`
+| `handshake_full_node_dns_auth_private` | `5349` | `127.0.0.1:53`
+| `handshake_full_node_dns_recurse_private` | `5350` | `127.0.0.1:53`
+| `handshake_full_node_dns_both_private` | `53` | `127.0.0.1:53`
 
 **NOTE**: Only one of the six DNS options, and one of the two `hsd` options,
 can be `true` at a time, or the container will fail to start.
