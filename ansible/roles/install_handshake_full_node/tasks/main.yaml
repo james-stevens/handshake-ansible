@@ -3,8 +3,8 @@
   ansible.builtin.include_role:
     name: docker
 
-- name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
-  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_nodes_docker_image }}"
+- name: "Pull full node container, {{ handshake_full_node_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_node_docker_image }}"
   register: result
   changed_when: "'CHANGE' in result.stdout"
 
@@ -21,9 +21,9 @@
 - name: Force systemd to reload
   ansible.builtin.meta: flush_handlers
 
-- name: "Create handshake-full-node's data directory, {{ handshake_full_nodes_data_directory }}"
+- name: "Create handshake-full-node's data directory, {{ handshake_full_node_data_directory }}"
   ansible.builtin.file:
-    path: "{{ handshake_full_nodes_data_directory }}"
+    path: "{{ handshake_full_node_data_directory }}"
     state: directory
     mode: '0755'
     owner: root
