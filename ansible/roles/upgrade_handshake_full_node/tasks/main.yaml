@@ -1,6 +1,6 @@
 ---
-- name: "Pull full node container, {{ handshake_full_nodes_docker_image }}"
-  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_nodes_docker_image }}"
+- name: "Pull full node container, {{ handshake_full_node_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_node_docker_image }}"
   register: result
   changed_when: "'CHANGE' in result.stdout"
   notify:
