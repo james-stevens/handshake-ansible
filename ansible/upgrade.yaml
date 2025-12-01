@@ -1,5 +1,9 @@
 ---
-- hosts: handshake_full_nodes
+- name: Upgrade Handshake Full Nodes
+  hosts: handshake_full_nodes
   become: true
-  roles:
-     - upgrade_handshake_full_node
+  tasks:
+  - name: Upgrade Handshake Full Nodes
+    ansible.builtin.include_role:
+      name: handshake_full_node
+      tasks_from: upgrade

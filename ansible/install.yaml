@@ -3,7 +3,7 @@
   hosts: handshake_full_nodes
   become: true
   tasks:
-  - name: Install docker on Ubuntu
+  - name: Install Handshake Full Nodes
     ansible.builtin.include_role:
       name: handshake_full_node
       tasks_from: install
