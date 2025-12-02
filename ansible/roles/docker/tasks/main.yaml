@@ -10,3 +10,21 @@
     name: docker
     tasks_from: debian
   when: ansible_facts['distribution']|lower == 'debian'
+
+- name: Install container helper scripts
+  ansible.builtin.copy:
+    src: "files/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: '0777'
+  loop:
+    - container_needs_updating
+    - stop_container
+
+- name: Install misc conatiner required packages
+  ansible.builtin.package:
+    name:
+      - jq
+      - bash
+    state: present
