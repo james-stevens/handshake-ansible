@@ -1,14 +1,15 @@
 #! /bin/sh
 
 image="$1"
-if ! test "$(skopeo inspect docker://${image} | jq -r .Digest)" = "$(docker image inspect ${image} | jq -r '.[0].Id')"
+
+old_id=$(docker image inspect ${image} | jq -r '.[0].Id')
+docker pull ${image}
+new_id=$(docker image inspect ${image} | jq -r '.[0].Id')
+
+if ! test "${old_id}" = "${new_id}"
   then
-    if docker pull ${image}
-    	then
-			echo "CHANGE"
-			exit 0
-    	fi
-    exit 1
+		echo "CHANGE"
+		exit 0
   fi
 
 echo "OK"

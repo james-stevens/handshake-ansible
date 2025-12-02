@@ -21,7 +21,6 @@
   loop:
     - container_needs_updating
     - stop_container
-    - docker_image_find_tag
 
 - name: Install misc conatiner required packages
   ansible.builtin.package:

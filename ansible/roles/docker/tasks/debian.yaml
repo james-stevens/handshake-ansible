@@ -15,7 +15,7 @@
 - name: Force unwanted packages to go
   ansible.builtin.meta: flush_handlers
 
-- name: Rest of the docker install, common wuth Ubuntu
+- name: Rest of the common docker install
   ansible.builtin.include_role:
     name: docker
     tasks_from: deb_ubu_common
