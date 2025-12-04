@@ -1,8 +1,9 @@
 # Handshake Full Node
 
-|---------|
-|Container|jamesstevens/handshake-full-node
-|System Service|handshake-full-node
+|.|.|
+|---------|---------|
+|Container|jamesstevens/handshake-full-node|
+|System Service|handshake-full-node|
 
 The Handshake Full Node is simply that - it's just a pre-built copy of `hsd` running [in a container](https://github.com/james-stevens/handshake-full-node). 
 
