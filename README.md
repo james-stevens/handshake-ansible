@@ -14,13 +14,13 @@ base operating system is only used as a docker host.
 
 ## Other Docker Platforms
 
-Becuase all the hard work is done in the container, it should be relatively easy to 
+Because all the hard work is done in the container, it should be relatively easy to 
 get this to work with other platforms, e.g. RedHat / CentOS etc.
 
 The file `roles/docker/tasks/main.yaml` splits the Docker install by platform.
 
 If you run `./do_debug` you can find out the `distribution` name of a new platform,
-then edit `roles/docker/tasks/main.yaml` to add suppport for it.
+then edit `roles/docker/tasks/main.yaml` to add support for it.
 
 
 ## Scripts
@@ -49,7 +49,7 @@ changed.
 
 The basic paradigm of [ansible](https://docs.ansible.com/projects/ansible/latest/getting_started/introduction.html)
 is that you run it from a machine, often your desktop, targetting a server, or group of servers, you wish to set up.
-Writing a series of instructions to automate the configuation of a server, is often called "IaC", Infrastructure as Code.
+Writing a series of instructions to automate the configuration of a server, is often called "IaC", Infrastructure as Code.
 
 The requirements of your server is that it runs an SSH service, you have a login and your login has
 permission to `sudo` (i.e. is in the group `sudo`). You will need to know
@@ -88,3 +88,16 @@ sets up a system service called `handshake-full-node` and enables & runs it.
 
 You can now stop, start & restart the service using `systemctl`, e.g. `sudo systemctl
 stop handshake-full-node` or check it's startus with `sudo systemctl status handshake-full-node`
+
+
+## Customising the Install
+
+Each service has a few options for customising the install. These options are
+documented in the service specific README.
+
+If you want to change the install option for all servers of a specific
+type, then the best thing to do is edit the corresponding file in the `group_vars`
+directory, e.g. `group_vars/handshake_full_nodes.yaml`
+
+If you want to change the install options for a single host, an easy way
+to do this is to add a `vars:` section to the corresponding host in the inventory.
