@@ -18,7 +18,7 @@ If any of the IP Addresses ceases to service, it will automatically stop using i
 detect which public resolvers respond the fasest and prefer using those. This will normally mean the ones
 that are physically closest to you.
 
-It will also take advanatgee of the cache at the public resolver to get answers faster.
+It will also take advanatge of the cache at the public resolver to get answers faster.
 
 This is by far the fastest and easiest way to get a local Handshake resolver, even though it does rely on
 other people to actually work.
@@ -44,7 +44,9 @@ boolean: Require clients to use DNS cookies, normal clients are likely to do thi
 		handshake_simple_resolver_require_dns_cookies: true
 
 ### handshake_simple_resolver_server_only_access
-boolean: When `true` the container only allows access from 127.0.0.0/8 (localhost)
+boolean: When `true` the container will only listen on `127.0.0.1:53` (localhost)
+When false it will not listen on `0.0.0.0` as `systemd` might be listening on `127.0.0.53:53`
+therefore, it will listen on each of `{{ ansible_facts.all_ipv4_addresses }}`
 
 		handshake_simple_resolver_server_only_access: false
 

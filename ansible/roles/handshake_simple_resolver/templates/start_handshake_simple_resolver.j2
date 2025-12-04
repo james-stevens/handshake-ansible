@@ -3,10 +3,11 @@
 exec docker run --read-only \
     -m {{ handshake_simple_resolver_memory_cap }} \
     --env SYSLOG_STDOUT=Y \
-{% if handshake_simple_resolver_server_only_access %}
     -p 127.0.0.1:53:53 -p 127.0.0.1:53:53/udp \
-{% else %}
-    -p 53:53 -p 53:53/udp \
+{% if not handshake_simple_resolver_server_only_access %}
+    {% for ip in ansible_facts.all_ipv4_addresses %}
+    -p {{ip}}:53:53 -p {{ip}}:53:53/udp \
+    {% endfor %}
 {% endif %}
     --env SIMPLE_REQUIRE_COOKIES={{ "yes" if handshake_simple_resolver_require_dns_cookies else "no" }} \
     --env "SIMPLE_ALLOWED_SUBNETS={{ handshake_simple_resolver_allowed_subnets | join(";") }}" \
