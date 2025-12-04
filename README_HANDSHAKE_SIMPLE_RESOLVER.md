@@ -1,6 +1,6 @@
 # Handshake Simple Resolver
 
-|.|.|
+|<!-- -->|<!-- -->|
 |---------|---------|
 |Container|jamesstevens/handshake-simple-resolver|
 |System Service|handshake-simple-resolver|
