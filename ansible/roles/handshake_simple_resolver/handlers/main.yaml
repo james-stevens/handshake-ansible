@@ -1,0 +1,5 @@
+---
+- name: Restart Handshake Simple Resolver Container
+  ansible.builtin.service:
+    name: handshake-simple-resolver
+    state: restarted

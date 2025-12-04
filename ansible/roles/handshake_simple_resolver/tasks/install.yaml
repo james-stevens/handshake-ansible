@@ -1,0 +1,38 @@
+---
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: docker
+
+- name: "Pull simple resolver container, {{ handshake_simple_resolver_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_simple_resolver_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+
+- name: Install handshake_simple_resolver's systemd service file
+  ansible.builtin.template:
+    src: templates/handshake-simple-resolver.service.j2
+    dest: /usr/lib/systemd/system/handshake-simple-resolver.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Systemd Reload
+
+- name: Force systemd to reload
+  ansible.builtin.meta: flush_handlers
+
+- name: Create and install handshake-simple-resolver start up script
+  ansible.builtin.template:
+    src: templates/start_handshake_simple_resolver.j2
+    dest: /usr/local/bin/start_handshake_simple_resolver
+    owner: root
+    group: root
+    mode: '0755'
+  notify:
+    - Restart Handshake Simple Resolver Container
+
+- name: "Ensure handshake-simple-resolver service is enabled & running"
+  ansible.builtin.service:
+    name: handshake-simple-resolver
+    enabled: true
+    state: started

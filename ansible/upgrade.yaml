@@ -7,3 +7,12 @@
     ansible.builtin.include_role:
       name: handshake_full_node
       tasks_from: upgrade
+
+- name: Upgrade Handshake Simple Resolver
+  hosts: handshake_simple_resolver
+  become: true
+  tasks:
+  - name: Upgrade Handshake Simple Resolver
+    ansible.builtin.include_role:
+      name: handshake_simple_resolver
+      tasks_from: upgrade
