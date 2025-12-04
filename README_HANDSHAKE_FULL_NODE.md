@@ -1,6 +1,6 @@
 # Handshake Full Node
 
-|.|.|
+|<!-- -->|<!-- -->|
 |---------|---------|
 |Container|jamesstevens/handshake-full-node|
 |System Service|handshake-full-node|
