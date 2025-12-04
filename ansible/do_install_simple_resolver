@@ -1,3 +1,0 @@
-#! /bin/sh
-
-PLAYBOOK=install_simple_resolver.yaml ./do_playbook "$*"

@@ -1,3 +1,0 @@
-#! /bin/sh
-
-PLAYBOOK=install_full_node.yaml ./do_playbook "$*"

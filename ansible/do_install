@@ -1,0 +1,3 @@
+#! /bin/sh
+
+PLAYBOOK=install.yaml ./do_playbook "$*"

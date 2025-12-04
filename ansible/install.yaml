@@ -1,4 +1,13 @@
 ---
+- name: Install Handshake Full Nodes
+  hosts: handshake_full_nodes
+  become: true
+  tasks:
+  - name: Install Handshake Full Nodes
+    ansible.builtin.include_role:
+      name: handshake_full_node
+      tasks_from: install
+
 - name: Install Handshake Simple Resolver
   hosts: handshake_simple_resolver
   become: true
