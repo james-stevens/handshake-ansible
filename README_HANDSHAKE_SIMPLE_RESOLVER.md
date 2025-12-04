@@ -44,12 +44,12 @@ boolean: Require clients to use DNS cookies, normal clients are likely to do thi
 		handshake_simple_resolver_require_dns_cookies: true
 
 ### handshake_simple_resolver_server_only_access
-boolean: Container only allows access from 127.0.0.0/8
+boolean: When `true` the container only allows access from 127.0.0.0/8 (localhost)
 
 		handshake_simple_resolver_server_only_access: false
 
 ### handshake_simple_resolver_allowed_subnets
-IP Subnet List: List of subnet allowed to use this resolver, use "any" to mean anybody
+IP Subnet List: List of subnet allowed to use this resolver, use `- any` to mean anybody
 
 		 handshake_simple_resolver_allowed_subnets:
 			 - 192.168.0.0/16
