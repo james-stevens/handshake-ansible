@@ -28,21 +28,28 @@ If you wish you can then front this with a DoH proxy to get either a JSON or bin
 
 ## Options
 
-# handshake_simple_resolver_docker_image: jamesstevens/handshake-simple-resolver
-# handshake_simple_resolver_memory_cap: 1g
+### handshake_simple_resolver_docker_image
+string: name of the container to pull and run for this service
+
+		handshake_simple_resolver_docker_image: jamesstevens/handshake-simple-resolver
+
+### handshake_simple_resolver_memory_cap
+string, docker memory specification: Cap on the memory this container can use
+
+		handshake_simple_resolver_memory_cap: 1g
 
 ### handshake_simple_resolver_require_dns_cookies
-Require cliennts to use DNS cookies, normal clients are likely to do this, abuse traffic less so
+boolean: Require clients to use DNS cookies, normal clients are likely to do this, abuse traffic less so
 
 		handshake_simple_resolver_require_dns_cookies: true
 
 ### handshake_simple_resolver_server_only_access
-Container only allows access from 127.0.0.0/8
+boolean: Container only allows access from 127.0.0.0/8
 
 		handshake_simple_resolver_server_only_access: false
 
 ### handshake_simple_resolver_allowed_subnets
-List of subnet allowed to use this resolver, use "any" to mean anybody
+IP Subnet List: List of subnet allowed to use this resolver, use "any" to mean anybody
 
 		 handshake_simple_resolver_allowed_subnets:
 			 - 192.168.0.0/16
