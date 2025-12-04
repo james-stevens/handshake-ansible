@@ -8,13 +8,15 @@ exec docker run --read-only \
 {% if handshake_full_node_hsd_public_node %}
     -p 12038:12038 -p 44806:44806 \
 {% endif %}
-{% if handshake_full_node_dns_both_public %}
-    -p 53:53/udp \
-{% elif handshake_full_node_dns_auth_public %}
-    -p 53:5349/udp \
-{% elif handshake_full_node_dns_recurse_public %}
-    -p 53:5350/udp \
-{% endif %}
+{% for ip in ansible_facts.all_ipv4_addresses %}
+	{% if handshake_full_node_dns_both_public %}
+		-p {{ ip }}:53:53/udp \
+	{% elif handshake_full_node_dns_auth_public %}
+		-p {{ ip }}:53:5349/udp \
+	{% elif handshake_full_node_dns_recurse_public %}
+		-p {{ ip }}:53:5350/udp \
+	{% endif %}
+{% endfor %}
 {% if handshake_full_node_hsd_private_node %}
     -p 127.0.0.1:12038:12038 -p 127.0.0.1:44806:44806 \
 {% endif %}

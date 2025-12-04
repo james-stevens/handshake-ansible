@@ -16,7 +16,7 @@ So queries with `RD=0` will get sent to `hsd`'s Auth port (`5349`) and `RD=1` qu
 go to the recursive port (`5350`). The proxy listens on port `53`.
 
 The container start-script can map the container's ports `5349`, `5350` or `53` to the
-host's port `53`, either on address `0.0.0.0` or `127.0.0.1`, depending if you enable
+host's port `53`, either on `{{ ansible_facts.all_ipv4_addresses }}` or `127.0.0.1`, depending if you enable
 the service as public or private. The default is to make the `hsd` ports public
 and the dns-proxy's port (`53`) private (`127.0.0.1`).
 
@@ -33,13 +33,16 @@ do anything useful, this can take some time.
 | Option Name | Container Port | Mapped to Host|
 |-------------|----------------|---------------|
 | `handshake_full_node_hsd_public_node` | `12038` & `44806` | `0.0.0.0:12038` & `0.0.0.0:44806`
-| `handshake_full_node_dns_auth_public` | `5349` | `0.0.0.0:53`
-| `handshake_full_node_dns_recurse_public` | `5350` | `0.0.0.0:53`
-| `handshake_full_node_dns_both_public` | `53` | `0.0.0.0:53`
+| `handshake_full_node_dns_auth_public` | `5349` | `{{ ALL v4 }}:53`
+| `handshake_full_node_dns_recurse_public` | `5350` | `{{ ALL v4 }}:53`
+| `handshake_full_node_dns_both_public` | `53` | `{{ ALL v4 }}:53`
 | `handshake_full_node_hsd_private_node` | `12038` & `44806` | `127.0.0.1:12038` & `127.0.0.1:44806`
 | `handshake_full_node_dns_auth_private` | `5349` | `127.0.0.1:53`
 | `handshake_full_node_dns_recurse_private` | `5350` | `127.0.0.1:53`
 | `handshake_full_node_dns_both_private` | `53` | `127.0.0.1:53`
+
+NOTE: `systemd` migth be listening on `127.0.0.53:53` so we need to listen in all of `{{ ansible_facts.all_ipv4_addresses }}`
+instead of `0.0.0.0:53`
 
 **NOTE**: Only one of the six DNS options, and one of the two `hsd` options,
 can be `true` at a time, or the container will fail to start.
