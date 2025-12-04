@@ -1,0 +1,11 @@
+---
+- name: "Pull simple resolver container, {{ handshake_simple_resolver_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_simple_resolver_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart Handshake Simple Resolver Container
+
+- name: Update the server
+  ansible.builtin.include_role:
+    name: update_server

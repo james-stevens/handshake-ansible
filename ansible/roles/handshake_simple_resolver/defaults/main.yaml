@@ -1,0 +1,10 @@
+---
+handshake_simple_resolver_docker_image: jamesstevens/handshake-simple-resolver
+handshake_simple_resolver_memory_cap: 1g
+handshake_simple_resolver_require_dns_cookies: true
+handshake_simple_resolver_server_only_access: false
+handshake_simple_resolver_allowed_subnets:
+    - 192.168.0.0/16
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 127.0.0.0/8

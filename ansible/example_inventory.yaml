@@ -10,3 +10,10 @@ handshake_full_nodes:
       ansible_host: 192.168.1.210
     ubuntu24:
       ansible_host: 192.168.1.220
+
+handshake_simple_resolver:
+  hosts:
+    debian13:
+      ansible_host: 192.168.1.210
+    ubuntu24:
+      ansible_host: 192.168.1.220
