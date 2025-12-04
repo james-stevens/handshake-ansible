@@ -25,3 +25,24 @@ other people to actually work.
 
 
 If you wish you can then front this with a DoH proxy to get either a JSON or binary DoH serivce.
+
+## Options
+
+# handshake_simple_resolver_docker_image: jamesstevens/handshake-simple-resolver
+# handshake_simple_resolver_memory_cap: 1g
+
+`handshake_simple_resolver_require_dns_cookies` - Require cliennts to use DNS cookies, normal clients are likely to do this, abuse traffic less so
+
+		handshake_simple_resolver_require_dns_cookies: true
+
+`handshake_simple_resolver_server_only_access` - Container only allows access from 127.0.0.0/8
+
+		handshake_simple_resolver_server_only_access: false
+
+`handshake_simple_resolver_allowed_subnets` - List of subnet allowed to use this resolver, use "any" to mean anybody
+
+		 handshake_simple_resolver_allowed_subnets:
+			 - 192.168.0.0/16
+			 - 10.0.0.0/8
+			 - 172.16.0.0/12
+			 - 127.0.0.0/8
