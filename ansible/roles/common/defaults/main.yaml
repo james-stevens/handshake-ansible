@@ -1,6 +1,13 @@
 ---
+# If you change `common_subnet_prefix` and do NOT use a `172.` prefix, you
+# will also need to change other files
 common_subnet_prefix: 172.18.0
+
+# this name doesn't really matter, just needs to be one not used by others
+# run `docker network ls` on the target server to check, if you feel the need
 common_network_name: handnet
 
+# Each container will have the IP `{{common_subnet_prefix}}.{{common_ip_....}}`
+# the host itself will always be `{{common_subnet_prefix}}.1`
 common_ip_handshake_full_node: 10
 common_ip_handshake_simple_resolver: 20
