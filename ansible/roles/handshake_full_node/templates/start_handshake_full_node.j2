@@ -10,7 +10,7 @@ exec docker run --read-only ${docker_net} \
 {% if handshake_full_node_hsd_public_node %}
     -p 12038:12038 -p 44806:44806 \
 {% endif %}
-{% for ip in ansible_facts.all_ipv4_addresses %}
+{% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
 	{% if handshake_full_node_dns_both_public %}
 		-p {{ ip }}:53:53/udp \
 	{% elif handshake_full_node_dns_auth_public %}
