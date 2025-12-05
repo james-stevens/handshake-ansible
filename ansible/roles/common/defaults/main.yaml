@@ -1,0 +1,6 @@
+---
+common_subnet_prefix: 172.18.0
+common_network_name: handnet
+
+common_ip_handshake_full_node: 10
+common_ip_handshake_simple_resolver: 20
