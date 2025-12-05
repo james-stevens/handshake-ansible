@@ -1,0 +1,19 @@
+#! /bin/sh
+
+pfx="$1"
+name="$2"
+
+if docker network inspect ${name} | grep -q "\"Gateway\": \"${pfx}.1\""
+	then 
+		echo "OK"; exit 0
+	fi
+
+docker network rm ${name}
+docker network create -d bridge --subnet=${pfx}.0/16 --gateway ${pfx}.1 ${name}
+if docker network inspect ${name} | grep -q "\"Gateway\": \"${pfx}.1\""
+	then
+		echo "CHANGE"; exit 0
+	fi
+
+echo "FAILED"
+exit 1

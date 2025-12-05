@@ -1,0 +1,12 @@
+#! /bin/sh
+
+docker ps | awk '{
+	n=split($2,x,":");
+	ver=""
+	if (n>1) ver=x[2];
+
+	col=36;
+	if (ver=="latest") col=33;
+	nme=sprintf("%s%c[%dm:%s%c[0m",x[1],27,col,ver,27);
+	printf "%-50s%-20s\n", nme,$NF
+	}' | sort

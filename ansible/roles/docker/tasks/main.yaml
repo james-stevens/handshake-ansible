@@ -17,14 +17,23 @@
     dest: "/usr/local/bin/{{ item }}"
     owner: root
     group: root
-    mode: '0777'
+    mode: '0755'
   loop:
     - container_needs_updating
     - stop_container
+    - configure_subnet
+    - dkps
+    - dksh
 
-- name: Install misc conatiner required packages
+- name: Run subnet install script
+  ansible.builtin.command: /usr/local/bin/configure_subnet "{{ common_subnet_prefix }}" "{{ common_network_name }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+
+- name: Install misc conatiner useful packages
   ansible.builtin.package:
     name:
       - jq
       - bash
+      - curl
     state: present

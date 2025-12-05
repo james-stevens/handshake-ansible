@@ -1,0 +1,8 @@
+#! /bin/sh
+
+if test "$1"
+	then
+		docker exec -it $1 /bin/sh
+	else
+		docker exec -it $(docker ps -q | head -1) /bin/sh;
+	fi
