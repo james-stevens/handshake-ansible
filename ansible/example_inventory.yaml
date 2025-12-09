@@ -15,5 +15,7 @@ handshake_simple_resolver:
   hosts:
     debian13-simple:
       ansible_host: 192.168.1.210
+      vars:
+        common_with_handshake_full_node: true
     ubuntu24-simple:
       ansible_host: 192.168.1.220

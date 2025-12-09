@@ -38,15 +38,16 @@
     state: started
 
 - name: Also install Full node
-  when: common_with_handshake_full_node
   ansible.builtin.include_role:
     name: handshake_full_node
-    vars:
-      handshake_full_node_hsd_public_node: false
-      handshake_full_node_dns_auth_public: false
-      handshake_full_node_dns_recurse_public: false
-      handshake_full_node_dns_both_public: false
-      handshake_full_node_hsd_private_node: false
-      handshake_full_node_dns_auth_private: false
-      handshake_full_node_dns_recurse_private: false
-      handshake_full_node_dns_both_private: false
+    tasks_from: install
+  vars:
+    handshake_full_node_hsd_public_node: false
+    handshake_full_node_dns_auth_public: false
+    handshake_full_node_dns_recurse_public: false
+    handshake_full_node_dns_both_public: false
+    handshake_full_node_hsd_private_node: false
+    handshake_full_node_dns_auth_private: false
+    handshake_full_node_dns_recurse_private: false
+    handshake_full_node_dns_both_private: false
+  when: common_with_handshake_full_node

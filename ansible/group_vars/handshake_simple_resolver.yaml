@@ -1,4 +1,6 @@
 ---
+common_with_handshake_full_node: true
+
 ### Uncomment and change any of these to override the defaults
 #
 # handshake_simple_resolver_docker_image: jamesstevens/handshake-simple-resolver
