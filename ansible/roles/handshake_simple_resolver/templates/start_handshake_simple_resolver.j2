@@ -5,8 +5,15 @@ docker_net="--net {{ common_network_name }} --ip {{ common_subnet_prefix }}.{{ c
 exec docker run --read-only ${docker_net} \
     -m {{ handshake_simple_resolver_memory_cap }} \
     --env SYSLOG_STDOUT=Y \
+{% if common_with_handshake_full_node %}
+	--env SIMPLE_RESOLVERS_LIST={{ common_subnet_prefix }}.{{ common_ip_handshake_full_node }} \
+{% else %}
+    {% if handshake_simple_resolver_parent_resolvers is defined%}
+    	--env "SIMPLE_RESOLVERS_LIST={{ handshake_simple_resolver_parent_resolvers | join(";") }}" \
+    {% endif %}
     -p 127.0.0.1:53:53 -p 127.0.0.1:53:53/udp \
-{% if not handshake_simple_resolver_server_only_access %}
+{% endif %}
+{% if handshake_simple_resolver_with_public_access %}
     {% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
     -p {{ip}}:53:53 -p {{ip}}:53:53/udp \
     {% endfor %}

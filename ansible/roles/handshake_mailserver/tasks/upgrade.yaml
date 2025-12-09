@@ -1,0 +1,11 @@
+---
+- name: "Pull Mail Server Container, {{ handshake_mailserver_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_mailserver_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart Handshake Mail Server Container
+
+- name: Update the server
+  ansible.builtin.include_role:
+    name: update_server

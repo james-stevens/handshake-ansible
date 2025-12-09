@@ -1,0 +1,4 @@
+---
+handshake_mailserver_docker_image: jamesstevens/handshake-mailserver
+handshake_mailserver_memory_cap: 1g
+handshake_mailserver_data_directory: /opt/data/handshake-mailserver

@@ -11,3 +11,8 @@ common_network_name: handnet
 # the host itself will always be `{{common_subnet_prefix}}.1`
 common_ip_handshake_full_node: 10
 common_ip_handshake_simple_resolver: 20
+
+
+# `with` booleans are for installing multiple containers & get them to talk to each other
+common_with_handshake_full_node: false
+common_with_handshake_simple_resolver: false

@@ -1,0 +1,46 @@
+---
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: docker
+
+- name: "Pull Mail Server container, {{ handshake_mailserver_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_mailserver_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+
+- name: Install handshake_mailserver's systemd service file
+  ansible.builtin.template:
+    src: templates/handshake-mailserver.service.j2
+    dest: /usr/lib/systemd/system/handshake-mailserver.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Systemd Reload
+
+- name: Force systemd to reload
+  ansible.builtin.meta: flush_handlers
+
+- name: Create and install handshake-mailserver start up script
+  ansible.builtin.template:
+    src: templates/start_handshake_mailserver.j2
+    dest: /usr/local/bin/start_handshake_mailserver
+    owner: root
+    group: root
+    mode: '0755'
+  notify:
+    - Restart Handshake Mail Server Container
+
+- name: "Create handshake-mailserver's data directory, {{ handshake_mailserver_data_directory }}"
+  ansible.builtin.file:
+    path: "{{ handshake_mailserver_data_directory }}"
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: "Ensure handshake-mailserver service is enabled & running"
+  ansible.builtin.service:
+    name: handshake-mailserver
+    enabled: true
+    state: started

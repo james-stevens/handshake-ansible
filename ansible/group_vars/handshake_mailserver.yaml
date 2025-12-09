@@ -1,0 +1,12 @@
+---
+# You MUST change these
+handshake_mailserver_hostname: mail.example.localhost
+handshake_mailserver_domain: example.localhost
+
+### Handshake aware DNS Resolvers
+### You MUST have one of these three enabled to be able to resolve Handshake Domains
+common_with_handshake_full_node: true
+# common_with_handshake_simple_resolver: true
+# handshake_mailserver_dns_resolvers:
+#   - 82.68.70.162
+#   - 82.68.70.163
