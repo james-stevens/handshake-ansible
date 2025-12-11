@@ -79,7 +79,7 @@ The two `A` records on the domain itself point to a pair of load-balancers that 
 The `A` record with the wild card (`82.68.70.166`) is the public IP Address of the container running the service.
 
 The container does provide an HTTPS service internally, so using external load-balancers is not necessary. Therefore, 
-you could just have
+you could just have this, instead of the last three lines.
 
 ```
 shakethemail.net.	600	IN	A	82.68.70.166
