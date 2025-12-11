@@ -33,7 +33,7 @@ outside world from.
 
 ## Resolving Handshake Domains
 
-By default, installing the Handshake Mail Server will also mean the Simple Resolver will also
+By default, installing the Handshake Mail Server will also mean the [Simple Resolver](README_HANDSHAKE_SIMPLE_RESOLVER.md) will also
 be installed. This is the quickest and easiest way to get a Handshake aware resolver (and has been tested),
 but you might not want this, or you may already have other Handshake-aware reaolvers.
 
