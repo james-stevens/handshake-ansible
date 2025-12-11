@@ -3,7 +3,7 @@
 The [Handshake Mail Server](https://github.com/james-stevens/handshake-mailserver) application 
 is the container behind the free Handshake mail service at [ShakeTheMail.net](https://ShakeTheMail.net).
 
-It's a little more complex to use than the Full Node or Simpple Resolver, as it needs a Handshake-aware
+It's a little more complex to use than the Full Node or Simple Resolver, as it needs a Handshake-aware
 DNS resolver service to be able to operate and you will need an SSL Certificate to support the TLS services.
 
 If you do not have a certificate, it will make one using a private certificate authority, so users
@@ -11,7 +11,8 @@ will get security warnings when using the service.
 
 ## Before You Install
 
-Before you install, take a look at the file `group_vars/handshake_mailserver.yaml` and make changes.
+Before you install, take a look at the file [ansible/group_vars/handshake_mailserver.yaml](ansible/group_vars/handshake_mailserver.yaml)
+and make changes.
 
 It contains the domain name you plan to use for the service and a few other options you will definitely want to change,
 like the title on the website.
