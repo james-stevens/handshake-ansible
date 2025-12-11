@@ -1,0 +1,17 @@
+[Unit]
+Description=Handshake Mail Server Container
+Documentation=https://github.com/james-stevens/handshake-ansible
+After=docker.service containerd.service
+Wants=docker.service containerd.service
+Requires=docker.socket docker.service
+
+[Service]
+Type=exec
+ExecStart=/usr/local/bin/start_handshake_mailserver
+ExecStop=/usr/local/bin/stop_container {{ handshake_mailserver_docker_image }}
+Restart=always
+
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,33 @@
+#! /bin/sh
+
+docker_net="--net {{ common_network_name }} --ip {{ common_subnet_prefix }}.{{ common_ip_handshake_mailserver }}"
+
+exec docker run --read-only ${docker_net} \
+    -m {{ handshake_mailserver_memory_cap }} \
+    --env SYSLOG_STDOUT=Y \
+    --hostname {{ handshake_mailserver_hostname }} \
+    -v {{ handshake_mailserver_data_directory }}:/opt/data \
+{% if handshake_mailserver_dns_resolvers is defined %}
+	{% for ip in handshake_mailserver_dns_resolvers %}
+		--dns {{ ip }} \
+	{% endfor %}
+{% else %}
+	{% if common_with_handshake_simple_resolver %}
+		--dns {{ common_subnet_prefix }}.{{ common_ip_handshake_simple_resolver }} \
+	{% elif common_with_handshake_full_node %}
+		--dns {{ common_subnet_prefix }}.{{ common_with_handshake_full_node }} \
+	{% else %}
+		{{ missing_handshake_aware_dns_service | mandatory("You must define a Handshake Aware DNS REsolver Service") }}
+	{% endif %}
+{% endif %}
+    {% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
+{% if not handshake_mailserver_expose_tls_sockets_only %}
+    -p {{ip}}:110:110 -p {{ip}}:143:143 \
+    -p {{ip}}:80:80 \
+{% endif %}
+    -p {{ip}}:25:25 \
+    -p {{ip}}:465:465 -p {{ip}}:587:587 \
+    -p {{ip}}:993:993 -p {{ip}}:995:995 \
+    -p {{ip}}:443:443 \
+    {% endfor %}
+    -t {{ handshake_mailserver_docker_image }}

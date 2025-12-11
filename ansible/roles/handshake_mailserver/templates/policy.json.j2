@@ -1,0 +1,20 @@
+{
+  "email_domain": "{{ handshake_mailserver_domain }}",
+  "website_domain": "{{ handshake_mailserver_domain }}",
+  "website_title": "{{ handshake_mailserver_website_title }}",
+  "logging_default": "local0",
+  "strict_referrer": true,
+  "allow_icann_domains": {{ "true" if handshake_mailserver_allow_icann_domains else "false" }},
+  "session_expiry": {{ handshake_mailserver_session_expiry | default("7200") }},
+  "never_active_account_expire": 7,
+  "was_active_account_expire": 30,
+  "manager_account": "{{ handshake_mailserver_manager_account }}",
+  "dns_supports_authoritative": false,
+  "icann_smtp_relay": null,
+  "cert_site_fqdn": "{{ handshake_mailserver_domain }}",
+  "cert_site_country": "{{ handshake_mailserver_cert_site_country | default("GB") }}",
+  "cert_site_location": "{{ handshake_mailserver_cert_site_location | default("London") }}",
+  "cert_site_org": "{{ handshake_mailserver_cert_site_org | default("Handshake") }}",
+  "cert_site_org_unit": "{{ handshake_mailserver_cert_site_org_unit | default("Ops") }}",
+  "cert_site_state": "{{ handshake_mailserver_cert_site_state | default("London") }}"
+}

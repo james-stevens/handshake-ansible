@@ -1,0 +1,5 @@
+---
+- name: Restart Handshake Mail Server Container
+  ansible.builtin.service:
+    name: handshake-mailserver
+    state: restarted

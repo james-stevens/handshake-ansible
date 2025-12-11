@@ -1,0 +1,9 @@
+---
+handshake_mailserver_docker_image: jamesstevens/handshake-mailserver
+handshake_mailserver_memory_cap: 1g
+handshake_mailserver_data_directory: /opt/data/handshake-mailserver
+
+handshake_mailserver_expose_tls_sockets_only: true
+
+handshake_mailserver_manager_account: manager
+handshake_mailserver_allow_icann_domains: false

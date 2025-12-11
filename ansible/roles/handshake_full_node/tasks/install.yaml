@@ -3,44 +3,7 @@
   ansible.builtin.include_role:
     name: docker
 
-- name: "Pull full node container, {{ handshake_full_node_docker_image }}"
-  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_full_node_docker_image }}"
-  register: result
-  changed_when: "'CHANGE' in result.stdout"
-
-- name: Install handshake_full_node's systemd service file
-  ansible.builtin.template:
-    src: templates/handshake-full-node.service.j2
-    dest: /usr/lib/systemd/system/handshake-full-node.service
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - Systemd Reload
-
-- name: Force systemd to reload
-  ansible.builtin.meta: flush_handlers
-
-- name: "Create handshake-full-node's data directory, {{ handshake_full_node_data_directory }}"
-  ansible.builtin.file:
-    path: "{{ handshake_full_node_data_directory }}"
-    state: directory
-    mode: '0755'
-    owner: root
-    group: root
-
-- name: Create and install handshake-full-node start up script
-  ansible.builtin.template:
-    src: templates/start_handshake_full_node.j2
-    dest: /usr/local/bin/start_handshake_full_node
-    owner: root
-    group: root
-    mode: '0755'
-  notify:
-    - Restart Full Node Container
-
-- name: "Ensure handshake-full-node service is enabled & running"
-  ansible.builtin.service:
-    name: handshake-full-node
-    enabled: true
-    state: started
+- name: Install Handshake Full Node Application
+  ansible.builtin.include_role:
+    name: handshake_full_node
+    tasks_from: app_install
