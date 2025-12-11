@@ -35,15 +35,16 @@ outside world from.
 
 By default, installing the Handshake Mail Server will also mean the [Simple Resolver](README_HANDSHAKE_SIMPLE_RESOLVER.md) will also
 be installed. This is the quickest and easiest way to get a Handshake aware resolver (and has been tested),
-but you might not want this, or you may already have other Handshake-aware reaolvers.
+but you might not want this, or you may already have other Handshake-aware resolvers.
 
-If you already have other Handshake-aware reaolvers, set `common_with_handshake_simple_resolver` to `false`
-and define `handshake_mailserver_dns_resolvers` as a list of the IP Addresses of your resolvers.
+If you already have other Handshake-aware resolvers, set `common_with_handshake_simple_resolver` to `false`
+and define `handshake_mailserver_dns_resolvers` as a list of the IP Addresses of your resolvers. You
+could also use a list of public Handshake Resolvers.
 
 If you prefer to use a Handshake Full Node as a resolver, set `common_with_handshake_simple_resolver` to `false`
 and set `common_with_handshake_full_node` to `true`. NOTE: this hasn't been fully tested yet.
 
-A new full node may take soem time before it can accurately resolve Handshake domain names as it
+A new full node may take some time before it can accurately resolve Handshake domain names as it
 will need to fully seed the blockchain first.
 
 ## `handshake_mailserver_domain`
@@ -70,14 +71,14 @@ shakethemail.net.	600	IN	A	82.68.70.163
 The `SOA` and `NS` records are about controlling where the domain is published from, so will be up to you.
 
 The `TXT` record specifies which IP Addresses email for this domain is allowed to originate from. This is to help
-prevent people from spoofing email from your domains. Some mail services, like GMail, will not accept email from
+prevent people from spoofing email from your domain. Some mail services, like GMail, will not accept email from
 a domain that does not have an SPF record.
 
-The two `A` records on the domain itself point to a pair of load-balancers that host the web site.
+The two `A` records on the domain itself point to a pair of load-balancers that run the TLS for the web site.
 
 The `A` record with the wild card (`82.68.70.166`) is the public IP Address of the container running the service.
 
-The container will provide an HTTPS service internally, so using eternal load-balancers is not necessary. Therefore, 
+The container does provide an HTTPS service internally, so using external load-balancers is not necessary. Therefore, 
 you could just have
 
 ```
