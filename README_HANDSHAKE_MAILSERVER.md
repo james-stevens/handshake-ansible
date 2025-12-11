@@ -19,6 +19,17 @@ like the title on the website.
 
 Each time you change this file, re-run the `do_install` script on the target server.
 
+`handshake_mailserver_hostname` is the server's hostname. Some mail services will get unhappy
+if the hostname your mail server calls itself does not match the forward and/or reverse DNS
+look up of it's IP Address.
+
+That is, when you do a DNS look up of the host name it calls itself, that must match the IP Address
+it is connecting from, and a reverse lookup on that IP Address must point back to the host name.
+
+So you should try and ensure this hostname resolves to the IP Address you are connecting to the
+outside world from.
+
+
 
 ## Resolving Handshake Domains
 
