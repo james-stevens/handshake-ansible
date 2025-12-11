@@ -1,0 +1,51 @@
+---
+- name: "Pull simple resolver container, {{ handshake_simple_resolver_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_simple_resolver_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart Handshake Simple Resolver Container
+
+- name: Install handshake_simple_resolver's systemd service file
+  ansible.builtin.template:
+    src: templates/handshake-simple-resolver.service.j2
+    dest: /usr/lib/systemd/system/handshake-simple-resolver.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Systemd Reload
+
+- name: Force systemd to reload
+  ansible.builtin.meta: flush_handlers
+
+- name: Create and install handshake-simple-resolver start up script
+  ansible.builtin.template:
+    src: templates/start_handshake_simple_resolver.j2
+    dest: /usr/local/bin/start_handshake_simple_resolver
+    owner: root
+    group: root
+    mode: '0755'
+  notify:
+    - Restart Handshake Simple Resolver Container
+
+- name: "Ensure handshake-simple-resolver service is enabled & running"
+  ansible.builtin.service:
+    name: handshake-simple-resolver
+    enabled: true
+    state: started
+
+- name: Also install Full node
+  ansible.builtin.include_role:
+    name: handshake_full_node
+    tasks_from: install
+  vars:
+    handshake_full_node_hsd_public_node: false
+    handshake_full_node_dns_auth_public: false
+    handshake_full_node_dns_recurse_public: false
+    handshake_full_node_dns_both_public: false
+    handshake_full_node_hsd_private_node: false
+    handshake_full_node_dns_auth_private: false
+    handshake_full_node_dns_recurse_private: false
+    handshake_full_node_dns_both_private: false
+  when: common_with_handshake_full_node

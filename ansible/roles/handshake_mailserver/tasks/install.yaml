@@ -3,10 +3,18 @@
   ansible.builtin.include_role:
     name: docker
 
+- name: Install Handshake Simple Resolver Application
+  ansible.builtin.include_role:
+    name: handshake_simple_resolver
+    tasks_from: app_install
+  when: common_with_handshake_simple_resolver
+
 - name: "Pull Mail Server container, {{ handshake_mailserver_docker_image }}"
   ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ handshake_mailserver_docker_image }}"
   register: result
   changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart Handshake Mail Server Container
 
 - name: Install handshake_mailserver's systemd service file
   ansible.builtin.template:
@@ -31,13 +39,27 @@
   notify:
     - Restart Handshake Mail Server Container
 
-- name: "Create handshake-mailserver's data directory, {{ handshake_mailserver_data_directory }}"
+- name: "Create handshake-mailserver's data directory"
   ansible.builtin.file:
-    path: "{{ handshake_mailserver_data_directory }}"
+    path: "{{ item }}"
     state: directory
     mode: '0755'
     owner: root
     group: root
+  loop:
+    - "{{ handshake_mailserver_data_directory }}"
+    - "{{ handshake_mailserver_data_directory }}/service"
+    - "{{ handshake_mailserver_data_directory }}/service/config"
+
+- name: Create policy config
+  ansible.builtin.template:
+    src: templates/policy.json.j2
+    dest: "{{ handshake_mailserver_data_directory }}/service/config/policy.json"
+    owner: root
+    group: root
+    mode: '0755'
+  notify:
+    - Restart Handshake Mail Server Container
 
 - name: "Ensure handshake-mailserver service is enabled & running"
   ansible.builtin.service:

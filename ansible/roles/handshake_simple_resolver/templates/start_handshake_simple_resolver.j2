@@ -1,6 +1,6 @@
 #! /bin/sh
 
-docker_net="--net {{ common_network_name }} --ip {{ common_subnet_prefix }}.{{ common_ip_handshake_full_node }}"
+docker_net="--net {{ common_network_name }} --ip {{ common_subnet_prefix }}.{{ common_ip_handshake_simple_resolver }}"
 
 exec docker run --read-only ${docker_net} \
     -m {{ handshake_simple_resolver_memory_cap }} \
