@@ -3,6 +3,12 @@
   ansible.builtin.include_role:
     name: docker
 
+- name: Install Handshake Full Node Application
+  ansible.builtin.include_role:
+    name: handshake_full_node
+    tasks_from: app_install
+  when: common_with_handshake_full_node
+
 - name: Install Handshake Simple Resolver Application
   ansible.builtin.include_role:
     name: handshake_simple_resolver
