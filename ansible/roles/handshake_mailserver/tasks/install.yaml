@@ -49,13 +49,11 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: '0755'
-    owner: root
-    group: root
   loop:
     - "{{ handshake_mailserver_data_directory }}"
     - "{{ handshake_mailserver_data_directory }}/service"
     - "{{ handshake_mailserver_data_directory }}/service/config"
+    - "{{ handshake_mailserver_data_directory }}/pems"
 
 - name: Create policy config
   ansible.builtin.template:
@@ -66,6 +64,10 @@
     mode: '0755'
   notify:
     - Restart Handshake Mail Server Container
+
+- name: Manifest server.pem
+  ansible.builtin.include_tasks: server_pem.yaml
+  when: handshake_mailserver_server_pem is defined
 
 - name: "Ensure handshake-mailserver service is enabled & running"
   ansible.builtin.service:

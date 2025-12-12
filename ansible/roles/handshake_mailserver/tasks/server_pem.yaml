@@ -1,0 +1,8 @@
+---
+- name: manifest the server.pem file
+  ansible.builtin.template:
+    src: templates/server_pem.j2
+    dest: "{{ handshake_mailserver_data_directory }}/pems/server.pem"
+    owner: root
+    group: root
+    mode: '0640'

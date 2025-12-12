@@ -6,6 +6,12 @@ handshake_mailserver_domain: example.localhost
 ### Probably will want to change this
 handshake_mailserver_website_title: "Handshake Webmail"
 
+### Perform HTTP REFERER checks, protects site from XSS
+# handshake_mailserver_strict_referrer: true
+
+### Where the long term data is stored on the host
+# handshake_mailserver_data_directory: /opt/data/handshake-mailserver
+
 ### Allow people to register with ICANN domains
 # handshake_mailserver_allow_icann_domains: false
 

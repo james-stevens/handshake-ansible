@@ -16,3 +16,12 @@
     ansible.builtin.include_role:
       name: handshake_simple_resolver
       tasks_from: upgrade
+
+- name: Upgrade Handshake Mail Server
+  hosts: handshake_mailserver
+  become: true
+  tasks:
+  - name: Upgrade Handshake Mail Server
+    ansible.builtin.include_role:
+      name: handshake_mailserver
+      tasks_from: upgrade

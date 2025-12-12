@@ -6,8 +6,7 @@ is the container behind the free Handshake mail service at [ShakeTheMail.net](ht
 It's a little more complex to use than the Full Node or Simple Resolver, as it needs a Handshake-aware
 DNS resolver service to be able to operate and you will need an SSL Certificate to support the TLS services.
 
-If you do not have a certificate, it will make one using a private certificate authority, so users
-will get security warnings when using the service.
+
 
 ## Before You Install
 
@@ -29,6 +28,54 @@ it is connecting from, and a reverse lookup on that IP Address must point back t
 So you should try and ensure this hostname resolves to the IP Address you are connecting to the
 outside world from.
 
+
+
+## Your TLS Certificate and Key
+
+The Handshake Mail Server supports TLS on all services it runs, that is HTTP, POP3, IMAP and SMTP.
+
+You will need a Private Key and Certificate that matches your `handshake_mailserver_domain`. This domain is
+used for both the website and email services. The Certificate will need to match both the domain and the 
+wild card name (`*`) in the domain.
+
+If you are using LetsEncrypt CertBot, you get this kind of certificate by specfying `-d` twice when creating the
+initial request. For exmaple `-d '*.shakethemail.net' -d shakethemail.net`.
+
+If you do not have a certificate & key, it will make one using a private certificate authority.
+It will last 10 yrs, but users will get security warnings when using the service.
+
+If you do have a publicly verifiable certificate, use the script `mailserver_update_server_pem` to encrypt
+both the certificate and key into your ansible facts, by running
+
+		./mailserver_update_server_pem <cert-file>.pem <key-file>.pem
+
+for example
+
+		./mailserver_update_server_pem /etc/letsencrypt/live/shakethemail.net/fullchain.pem /etc/letsencrypt/live/shakethemail.net/privkey.pem
+
+This will also create a file in your `${HOME}` directory called `.handshake_vault_password`. This will store the key
+it used to encrypt the ansible vault where the cert & key will be stored, `group_vars/handshake_mailserver/server_pem.yaml`.
+
+It is considered safe to store encrypted ansible vaults in public resposibories, like git.
+
+Now when you run an `install` on a mail server host, the host will also be given the key & certificate. If
+there is no `server_pem.yaml` file, that step is simple skipped.
+
+### Updating the Certificate & Key
+
+As the certificate expires, you will need to update it. To do this, re-run your `mailserver_update_server_pem` command
+to recreate the ansible vault with the new cert/key, then run
+
+		$ PLAYBOOK=certificate_update.yaml ./do_playbook <hostname>
+
+Alternatively, you can update the certificate & key manually on the target server by updating the file `{{ handshake_mailserver_data_directory }}/pems/server.pem`,
+by default `/opt/data/handshake-mailserver/pems/server.pem`.
+
+You will need to `cat` the certificate and key into a single file, e.g.
+
+		cat fullchain.pem privkey.pem > /opt/data/handshake-mailserver/pems/server.pem
+
+Every hour, the service will check if the `server.pem` has been updated and install the new cert/key if it has.
 
 
 ## Resolving Handshake Domains
