@@ -16,7 +16,12 @@ and make changes. More info is in the file.
 It contains the domain name you plan to use for the service and a few other options you will definitely want to change,
 like the title on the website.
 
-Each time you change this file, re-run the `do_install` script on the target server.
+Each time you change this file, re-run the `do_install` script on the target server. If you start using the service,
+especially if you start changing the WebMail's internal configurtion, 
+some things will get baked into the system, so try and get it all sorted from day-1.
+
+If you want to completely reset the system, you can just remove everything in the data directory, then re-run `do_install`.
+Obviously, this discards all accounts and any email they might have.
 
 `handshake_mailserver_hostname` is the server's hostname. Some mail services will get unhappy
 if the hostname your mail server calls itself does not match the forward and/or reverse DNS
