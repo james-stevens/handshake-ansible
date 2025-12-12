@@ -84,15 +84,16 @@ By default, installing the Handshake Mail Server will also mean the [Simple Reso
 be installed. This is the quickest and easiest way to get a Handshake aware resolver (and has been tested),
 but you might not want this, or you may already have other Handshake-aware resolvers.
 
-If you already have other Handshake-aware resolvers, set `common_with_handshake_simple_resolver` to `false`
-and define `handshake_mailserver_dns_resolvers` as a list of the IP Addresses of your resolvers. You
-could also use a list of public Handshake Resolvers.
+If you already have (or want to use) existing Handshake-aware resolvers, including using existing public Handshake Resolvers,
+set `common_with_handshake_simple_resolver` to `false` and define `handshake_mailserver_dns_resolvers`
+as a list of the IP Addresses of the resolvers (also tested).
 
 If you prefer to use a Handshake Full Node as a resolver, set `common_with_handshake_simple_resolver` to `false`
 and set `common_with_handshake_full_node` to `true`. NOTE: this hasn't been fully tested yet.
 
 A new full node may take some time before it can accurately resolve Handshake domain names as it
 will need to fully seed the blockchain first.
+
 
 ## `handshake_mailserver_domain`
 
