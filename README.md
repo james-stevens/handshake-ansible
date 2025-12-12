@@ -4,6 +4,7 @@ This repo contains the ansible you need to install various Handshake service
 on either a Debian or Ubuntu host. Currently it supports installing
 - [Handshake Full Node](README_HANDSHAKE_FULL_NODE.md) (`hsd`)
 - [Handshake Simple Resolver](README_HANDSHAKE_SIMPLE_RESOLVER.md)
+- [Handshake Mail Server](README_HANDSHAKE_MAILSERVER.md), as in [ShakeTheMail.net](https://ShakeTheMail.net)
 
 I tested it on Debian v13 and Ubuntu v24.04, but its likely the ansible will work
 on other versions as ansible is reasonably version independent.
