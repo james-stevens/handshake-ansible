@@ -6,7 +6,14 @@ if test -z "$*"
     exit 1
   fi
 
+pass="${HOME}/.handshake_vault_password"
+if ! test -f ${pass}
+	then
+		dd if=/dev/random bs=1 count=24 2>/dev/null | base64 > ${pass}
+	fi
+
 ansible-playbook -e "${EXTRA_VARS}" -b -i ./${INVENTORY:-inventory.yaml} -l "$*" ./${PLAYBOOK:-install.yaml} \
+  --vault-password-file "${pass}" \
   --become-password-file ~/.ssh/pass
 
 # replace `--become-password-file ~/.ssh/pass` with `-K` if you prefer to be prompted for the `sudo` password

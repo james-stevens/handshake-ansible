@@ -1,0 +1,9 @@
+---
+- name: Upgrade Handshake Mail Server Certificate
+  hosts: handshake_mailserver
+  become: true
+  tasks:
+  - name: Upgrade Handshake Mail Server Certificate
+    ansible.builtin.include_role:
+      name: handshake_mailserver
+      tasks_from: server_pem

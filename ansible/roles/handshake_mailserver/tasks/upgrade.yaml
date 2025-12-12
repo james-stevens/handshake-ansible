@@ -6,6 +6,19 @@
   notify:
     - Restart Handshake Mail Server Container
 
+- name: Update Handshake Full Node Application
+  ansible.builtin.include_role:
+    name: handshake_full_node
+    tasks_from: upgrade
+  when: common_with_handshake_full_node
+
+- name: Update Handshake Simple Resolver Application
+  ansible.builtin.include_role:
+    name: handshake_simple_resolver
+    tasks_from: upgrade
+  when: common_with_handshake_simple_resolver
+
 - name: Update the server
   ansible.builtin.include_role:
     name: update_server
+  when: update_server_include_platform is defined and update_server_include_platform|bool == true

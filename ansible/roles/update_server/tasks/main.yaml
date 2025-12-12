@@ -2,12 +2,10 @@
 - name: Update packages database
   ansible.builtin.apt:
     update_cache: true
-  when: update_server_include_platform|bool == true
 
 - name: Update all packages
   ansible.builtin.apt:
     name: "*"
     state: latest
-  when: update_server_include_platform|bool == true
   notify:
     - Reboot Server

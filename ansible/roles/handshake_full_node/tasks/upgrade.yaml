@@ -9,3 +9,4 @@
 - name: Update the server
   ansible.builtin.include_role:
     name: update_server
+  when: update_server_include_platform is defined and update_server_include_platform|bool == true
