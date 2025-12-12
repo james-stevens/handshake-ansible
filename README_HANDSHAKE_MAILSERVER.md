@@ -10,8 +10,8 @@ DNS resolver service to be able to operate and you will need an SSL Certificate 
 
 ## Before You Install
 
-Before you install, take a look at the file [ansible/group_vars/handshake_mailserver.yaml](ansible/group_vars/handshake_mailserver.yaml)
-and make changes.
+Before you install, take a look at the file [ansible/group_vars/handshake_mailserver/main.yaml](ansible/group_vars/handshake_mailserver/main.yaml)
+and make changes. More info is in the file.
 
 It contains the domain name you plan to use for the service and a few other options you will definitely want to change,
 like the title on the website.
