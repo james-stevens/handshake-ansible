@@ -7,9 +7,6 @@
 ### Use sqlite3 in {{powerdns_primary_data_directory}}
 # powerdns_primary_use_sqlite3: true
 
-### if not using Sqlite3, you can use MySQL
-### run `powerdns_primary_make_mysql_password` to crete a vault with a random password
-# powerdns_primary_mysql_credentials: /usr/local/etc/pdns_mysql.env
 
 # powerdns_primary_pdns_log_level: 5
 # powerdns_primary_pdns_log_facility: 6
