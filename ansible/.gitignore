@@ -1,2 +1,3 @@
 inventory.yaml
 group_vars/handshake_mailserver/server_pem.yaml
+group_vars/powerdns_primary/mysql_password.yaml

@@ -1,0 +1,19 @@
+#! /bin/sh
+
+docker_net="--net {{ common_network_name }} --ip {{ common_subnet_prefix }}.{{ common_ip_handshake_powerdns_primary }}"
+
+exec docker run --read-only ${docker_net} \
+    --env SYSLOG_STDOUT=Y \
+    --env PDNS_LOG_LEVEL="{{ powerdns_primary_pdns_log_level }}" \
+    --env PDNS_LOG_FACILITY="{{ powerdns_primary_pdns_log_facility }}" \
+    --env PDNS_CATALOG_ZONE="{{ powerdns_primary_pdns_catalog_zone }}" \
+    --env DNS_SECONDARY_SERVERS="{{ powerdns_primary_secondary_servers | join(';') }}" \
+{% if not powerdns_primary_use_sqlite3 and powerdns_primary_mysql_password is defined %}
+	--env-file {{ powerdns_primary_mysql_credentials }} \
+{% endif %}
+    -v {{ powerdns_primary_data_directory }}:/opt/data \
+{% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
+	-p {{ ip }}:80:80 \
+	-p {{ ip }}:5353:5353 -p {{ ip }}:5353:5353/udp \
+{% endfor %}
+    -t {{ powerdns_primary_docker_image }}

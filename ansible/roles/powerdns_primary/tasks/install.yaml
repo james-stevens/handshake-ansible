@@ -1,0 +1,9 @@
+---
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: docker
+
+- name: Install PowerDNS Primary
+  ansible.builtin.include_role:
+    name: powerdns_primary
+    tasks_from: app_install

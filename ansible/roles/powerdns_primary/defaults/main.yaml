@@ -1,0 +1,11 @@
+---
+powerdns_primary_docker_image: jamesstevens/powerdns
+powerdns_primary_data_directory: /opt/data/powerdns-primary
+powerdns_primary_use_sqlite3: true
+powerdns_primary_mysql_credentials: /usr/local/etc/pdns_mysql.env
+
+powerdns_primary_pdns_log_level: 5
+powerdns_primary_pdns_log_facility: 6
+powerdns_primary_pdns_catalog_zone: lst.zz
+powerdns_primary_secondary_servers:
+  - 127.1.0.1

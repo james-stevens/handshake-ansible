@@ -1,0 +1,16 @@
+[Unit]
+Description=PowerDNS Primary
+Documentation=https://github.com/james-stevens/handshake-ansible
+After=docker.service containerd.service
+Wants=docker.service containerd.service
+Requires=docker.socket docker.service
+
+[Service]
+ExecStart=/usr/local/bin/start_powerdns_primary
+ExecStop=/usr/local/bin/stop_container {{ powerdns_primary_docker_image }}
+Restart=always
+
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
