@@ -36,7 +36,7 @@ Once you have DNS data in the system changing backends is not particualarly easy
 
 ## Supported Tweaks
 
-In the file [group_vars/powerdns_primary/main.yaml] you can tweak the follow values
+In the file [group_vars/powerdns_primary/main.yaml](group_vars/powerdns_primary/main.yaml) you can tweak the follow values
 
 | Option | Default | Meaning
 |--------|---------|--------
