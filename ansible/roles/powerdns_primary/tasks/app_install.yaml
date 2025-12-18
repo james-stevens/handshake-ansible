@@ -1,0 +1,63 @@
+---
+- name: "Pull PowerDNS Primary container, {{ powerdns_primary_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ powerdns_primary_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart PowerDNS Primary
+
+- name: Install powerdns_primary's systemd service file
+  ansible.builtin.template:
+    src: templates/powerdns-primary.service.j2
+    dest: /usr/lib/systemd/system/powerdns-primary.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Systemd Reload
+
+- name: Force systemd to reload
+  ansible.builtin.meta: flush_handlers
+
+- name: "Create powerdns-primary's data directory, {{ powerdns_primary_data_directory }}"
+  ansible.builtin.file:
+    path: "{{ powerdns_primary_data_directory }}"
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Create and install PowerDNS Primary start-up script
+  ansible.builtin.template:
+    src: templates/start_powerdns_primary.j2
+    dest: /usr/local/bin/start_powerdns_primary
+    owner: root
+    group: root
+    mode: '0755'
+  notify:
+    - Restart PowerDNS Primary
+
+- name: Create MySQL Credentials File
+  ansible.builtin.template:
+    src: templates/mysql_credentials.j2
+    dest: "{{ powerdns_primary_mysql_credentials }}"
+    owner: root
+    group: root
+    mode: '0640'
+  when: powerdns_primary_mysql_password is defined and not powerdns_primary_use_sqlite3
+  notify:
+    - Restart PowerDNS Primary
+
+- name: Create HTTP Credentials File
+  ansible.builtin.template:
+    src: templates/htpasswd.j2
+    dest: "{{ powerdns_primary_http_credentials }}"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: "Ensure powerdns-primary service is enabled & running"
+  ansible.builtin.service:
+    name: powerdns-primary
+    enabled: true
+    state: started

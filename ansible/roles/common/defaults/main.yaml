@@ -12,6 +12,7 @@ common_network_name: handnet
 common_ip_handshake_full_node: 10
 common_ip_handshake_simple_resolver: 20
 common_ip_handshake_mailserver: 30
+common_ip_handshake_powerdns_primary: 40
 
 
 # `with` booleans are for installing multiple containers & get them to talk to each other

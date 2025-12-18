@@ -1,0 +1,26 @@
+---
+# powerdns_primary_docker_image: jamesstevens/powerdns
+
+### Host data directory
+# powerdns_primary_data_directory: /opt/data/powerdns-primary
+
+### Use sqlite3 in {{powerdns_primary_data_directory}}
+# powerdns_primary_use_sqlite3: true
+
+
+# powerdns_primary_pdns_log_level: 5
+# powerdns_primary_pdns_log_facility: 6
+
+
+### First thing you will need to do is create this zone as a `Producer` zone
+### The catalog can than be used to tell your RFC secondaries which zones to pull in
+# powerdns_primary_pdns_catalog_zone: lst.zz
+
+### if you have RFC secondary DNS servers, list their IPs here
+# powerdns_primary_secondary_servers:
+#   - 127.1.0.1
+
+### this login/password is "admin" & "admin", you prob want to change this
+### use `openssl passwd -6 [password]` to encrypt (SHA512)
+# powerdns_primary_admin_logins:
+#   admin: "$6$TSkuVedfuG/Jqjek$seN4GFhfdUL/QAITGdfHW02GDzB6gU0zs7OZjfdNryE7SNGNtAPSiE76.zlvWSo4TiAeeQTpztoNF7R0WmDcj0"

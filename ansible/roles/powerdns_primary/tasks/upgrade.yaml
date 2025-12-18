@@ -1,0 +1,12 @@
+---
+- name: "Pull container, {{ powerdns_primary_docker_image }}"
+  ansible.builtin.command: /usr/local/bin/container_needs_updating "{{ powerdns_primary_docker_image }}"
+  register: result
+  changed_when: "'CHANGE' in result.stdout"
+  notify:
+    - Restart PowerDNS Primary
+
+- name: Update the server
+  ansible.builtin.include_role:
+    name: update_server
+  when: update_server_include_platform is defined and update_server_include_platform|bool == true

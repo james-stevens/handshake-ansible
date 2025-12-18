@@ -26,10 +26,6 @@ awk 'BEGIN {
 	printf "  - \"%s\"\n",$0
 	}' $* > group_vars/handshake_mailserver/server_pem.yaml
 
-pass="${HOME}/.handshake_vault_password"
-if ! test -f ${pass}
-	then
-		dd if=/dev/random bs=1 count=24 2>/dev/null | base64 > ${pass}
-	fi
+. ./ansible_vault_password.inc
 
-ansible-vault encrypt --vault-password-file "${pass}" group_vars/handshake_mailserver/server_pem.yaml
+ansible-vault encrypt --vault-password-file "${vault_pass_file}" group_vars/handshake_mailserver/server_pem.yaml

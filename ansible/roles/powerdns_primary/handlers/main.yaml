@@ -1,0 +1,5 @@
+---
+- name: Restart PowerDNS Primary
+  ansible.builtin.service:
+    name: powerdns-primary
+    state: restarted
