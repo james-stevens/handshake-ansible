@@ -40,12 +40,12 @@ In the file `group_vars/powerdns_primary/main.yaml` you can tweak the follow val
 
 | Option | Default | Meaning
 |--------|---------|--------
-| powerdns_primary_data_directory | /opt/data/powerdns-primary | Host's directory for storing data, e.g. Sqlite3 data
+| powerdns_primary_data_directory | `/opt/data/powerdns-primary` | Host's directory for storing data, e.g. Sqlite3 data
 | powerdns_primary_use_sqlite3 | true | Use the Sqlite3 backend for storing DNS data
 | powerdns_primary_pdns_log_level | 5 | PowerDNS log level
 | powerdns_primary_pdns_log_facility | 6 | PowerDNS log facility
-| powerdns_primary_pdns_catalog_zone | lst.zz | Domain Name to use as a catalog for listing all zones you have in the database
-| powerdns_primary_secondary_servers | 127.1.0.1 | List of IP Addresses of your secondary name servers
+| powerdns_primary_pdns_catalog_zone | `lst.zz` | Domain Name to use as a catalog for listing all zones you have in the database
+| powerdns_primary_secondary_servers | `127.1.0.1` | List of IP Addresses of your secondary name servers
 | powerdns_primary_admin_logins | admin:[password] | Logins for the WebUI
 
 By default the only login will be
