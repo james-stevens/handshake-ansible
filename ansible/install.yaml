@@ -25,3 +25,12 @@
     ansible.builtin.include_role:
       name: handshake_mailserver
       tasks_from: install
+
+- name: Install PowerDNS Primary
+  hosts: powerdns_primary
+  become: true
+  tasks:
+  - name: Install PowerDNS Primary
+    ansible.builtin.include_role:
+      name: powerdns_primary
+      tasks_from: install

@@ -12,6 +12,7 @@ exec docker run --read-only ${docker_net} \
 	--env-file {{ powerdns_primary_mysql_credentials }} \
 {% endif %}
     -v {{ powerdns_primary_data_directory }}:/opt/data \
+    -v {{ powerdns_primary_http_credentials }}:/etc/nginx/htpasswd \
 {% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
 	-p {{ ip }}:80:80 \
 	-p {{ ip }}:5353:5353 -p {{ ip }}:5353:5353/udp \
