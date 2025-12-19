@@ -5,6 +5,8 @@ powerdns_primary_use_sqlite3: true
 powerdns_primary_mysql_credentials: /usr/local/etc/pdns_mysql.env
 powerdns_primary_http_credentials: /usr/local/etc/pdns_htpasswd
 
+powerdns_primary_hidden_primary: true
+
 powerdns_primary_pdns_log_level: 5
 powerdns_primary_pdns_log_facility: 6
 powerdns_primary_pdns_catalog_zone: lst.zz

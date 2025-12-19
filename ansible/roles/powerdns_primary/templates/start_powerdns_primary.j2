@@ -15,6 +15,11 @@ exec docker run --read-only ${docker_net} \
     -v {{ powerdns_primary_http_credentials }}:/etc/nginx/htpasswd \
 {% for ip in ansible_facts.all_ipv4_addresses if ip[:4] != "172." %}
 	-p {{ ip }}:80:80 \
-	-p {{ ip }}:5353:5353 -p {{ ip }}:5353:5353/udp \
+	{% if powerdns_primary_hidden_primary %}
+		-p {{ ip }}:5353:5353 -p {{ ip }}:5353:5353/udp \
+		-p {{ ip }}:53:53 -p {{ ip }}:53:53/udp \
+	{% else %}
+		-p {{ ip }}:53:5353 -p {{ ip }}:53:5353/udp \
+	{% endif %}
 {% endfor %}
     -t {{ powerdns_primary_docker_image }}

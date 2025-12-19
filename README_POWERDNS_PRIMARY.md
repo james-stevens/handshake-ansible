@@ -12,7 +12,37 @@ It also includes an internal ISC `bind` server that will convert the AXFR zone t
 into the more standard IXFR. This will provide significantly faster zone updates, especially for
 larger or signed zones.
 
+
+## A Hidden Primary
+
+In the world of DNS it is considered "best practice" to run a "Hidden Primary". This means
+that the name servers you make available to the outside world are only Secondaries.
+
+Secondary Name Servers typically can not edit the DNS records, but take what they are given by the Primary,
+with all edits doen on the primary. For this reason secondary name servers are easier to secure.
+
+For this reason, this set up runs PowerDNS as a Hidden Primary and runs ISC bind as a seconary,
+making this is suitable to use as one of your public facing `NS` for your zones.
+
+`bind` relies in you setting up and maintaining a Catalog Zone to tell it the list of domains
+you want it to copy from PowerDNS.
+
  
+## The Catalog Zone
+
+A Catalog Zone is a meta-zone that is used to list the domains you want secondary name servers to upload.
+
+The default catalog zone is `lst.zz`, but you will need to create it manually st the start. It's type
+should be `Producer`.
+
+As you create zones you need to manually add them to the catalog. To do this, go into the zone's `META` data
+and for the metadata item `CATALOG` just set the value `lst.zz`.
+
+If you wish, you can have multiple catalog zones, but this is the one that the internal `bind` will
+use to know which zones to run the IXFR convertion on. Therefore, this is the one you would probably
+give to your `{{powerdns_primary_secondary_servers}}`, to tell them which zones you want them to be loading up.
+
+
 ## Supported Backends
 
 This ansible supports either the Sqlite3 or MySQL backends for storing your DNS data.
@@ -54,18 +84,3 @@ By default the only login will be
 
 This is user: `admin`, password: `admin` - you can use `openssl passwd -6 [password]` to encrypt a password in this
 format (SHA512).
-
-## The Catalog Zone
-
-A Catalog Zone is a meta-zone that is used to list the domains you want secondary name servers to upload.
-
-The default catalog zone is `lst.zz`, but you will need to create it manually in the beginning. It's type
-should be `Producer`.
-
-As you create zones you need to manually add them to the catalog. To do this, go into the zone's `META` data
-and for the metadata item `CATALOG` just set the value `lst.zz`.
-
-If you wish, you can have multiple catalog zones, but this is the one that the internal `bind` will
-use to know which zones ti run the IXFR convertion on. Therefore, this the one you would probably
-give to your `{{powerdns_primary_secondary_servers}}`, to tell them which zones you want them to be loading up.
-

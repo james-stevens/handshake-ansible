@@ -12,6 +12,10 @@
 # powerdns_primary_pdns_log_facility: 6
 
 
+### With this `true`, port 53 is mapped to the bind secondary
+### changing this to `false` will map port 53 directly to PowerDNS
+# powerdns_primary_hidden_primary: false
+
 ### First thing you will need to do is create this zone as a `Producer` zone
 ### The catalog can than be used to tell your RFC secondaries which zones to pull in
 # powerdns_primary_pdns_catalog_zone: lst.zz
