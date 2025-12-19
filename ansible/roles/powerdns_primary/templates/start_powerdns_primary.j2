@@ -7,7 +7,9 @@ exec docker run --read-only ${docker_net} \
     --env PDNS_LOG_LEVEL="{{ powerdns_primary_pdns_log_level }}" \
     --env PDNS_LOG_FACILITY="{{ powerdns_primary_pdns_log_facility }}" \
     --env PDNS_CATALOG_ZONE="{{ powerdns_primary_pdns_catalog_zone }}" \
+{% if powerdns_primary_secondary_servers is defined %}
     --env DNS_SECONDARY_SERVERS="{{ powerdns_primary_secondary_servers | join(';') }}" \
+{% endif %}
 {% if not powerdns_primary_use_sqlite3 and powerdns_primary_mysql_password is defined %}
 	--env-file {{ powerdns_primary_mysql_credentials }} \
 {% endif %}

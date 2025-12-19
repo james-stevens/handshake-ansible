@@ -75,8 +75,17 @@ In the file [ansible/group_vars/powerdns_primary/main.yaml](ansible/group_vars/p
 | powerdns_primary_pdns_log_level | 5 | PowerDNS log level
 | powerdns_primary_pdns_log_facility | 6 | PowerDNS log facility
 | powerdns_primary_pdns_catalog_zone | `lst.zz` | Domain Name to use as a catalog for listing all zones you have in the database
-| powerdns_primary_secondary_servers | `127.1.0.1` | List of IP Addresses of your secondary name servers
+| powerdns_primary_secondary_servers | [none] | List of IP Addresses of your secondary name servers
 | powerdns_primary_admin_logins | admin:[password] | Logins for the WebUI
+
+### powerdns_primary_secondary_servers
+
+If you define `{{powerdns_primary_secondary_servers}}` as a list of IP Address, these addressess will be allowed to
+transfer zones from `bind` and will be signalled when a zone has been updated, so they know to pull a new copy.
+
+If you do not define any `{{powerdns_primary_secondary_servers}}` it will still work fine.
+
+### powerdns_primary_admin_logins
 
 By default the only login will be
 
